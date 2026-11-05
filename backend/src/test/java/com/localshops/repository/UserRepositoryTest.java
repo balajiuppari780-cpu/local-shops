@@ -56,3 +56,4 @@ class UserRepositoryTest {
         assertThat(userRepository.existsByEmail("unknown@example.com")).isFalse();
     }
 }
+
