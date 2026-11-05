@@ -41,6 +41,7 @@ public class OrderService {
     private final ShopRepository shopRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public OrderResponse placeOrderWithRetry(CreateOrderRequest request, String customerEmail, String idempotencyKey) {
         int maxRetries = 3;
         for (int attempt = 1; attempt <= maxRetries; attempt++) {
@@ -100,7 +101,8 @@ public class OrderService {
 
             // Rule: Orders must only contain products from one shop
             if (singleShop == null) {
-                singleShop = product.getShop();
+                singleShop = shopRepository.findById(product.getShop().getId())
+                        .orElse(product.getShop());
             } else if (!singleShop.getId().equals(product.getShop().getId())) {
                 throw new BadRequestException("An order can only contain products from a single shop. Item '"
                         + product.getName() + "' belongs to another shop.");

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>LocalShops Marketplace - Fresh Neighborhood Stores</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link crossorigin="" rel="preconnect" href="https://fonts.gstatic.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#006948",
+            "primary-container": "#00855d",
+            "primary-fixed": "#85f8c4",
+            secondary: "#904d00",
+            "secondary-container": "#fe932c",
+            surface: "#fff8f5",
+            "surface-dim": "#e2d8d2",
+            "surface-container": "#f6ece6",
+            "surface-container-low": "#fcf2eb",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#f0e6e0",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#3d4a42",
+            outline: "#6d7a72",
+            "outline-variant": "#bccac0",
+            error: "#ba1a1a",
+            "error-container": "#ffdad6"
+          },
+          fontFamily: {
+            headline: ["Plus Jakarta Sans", "sans-serif"],
+            body: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #fff8f5; color: #1f1b17; }
+    h1, h2, h3, h4, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    /* Modern Dialog & Backdrop Guidelines */
+    dialog:modal { overscroll-behavior: contain; }
+    dialog::backdrop { background: rgba(31, 27, 23, 0.45); backdrop-filter: blur(4px); overflow: hidden; overscroll-behavior: contain; }
+  </style>
+  <script src="api.js"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-primary text-white text-xs py-2 px-4 text-center font-medium flex items-center justify-center gap-2">
+    <span class="material-symbols-outlined text-[16px]">eco</span>
+    <span>Supporting independent local shops & verified organic grocers with zero middleman markup</span>
+  </div>
+
+  <!-- Main Navbar -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-surface-container-high shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Shop Selector -->
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-md group-hover:bg-primary-container transition-colors">
+            <span class="material-symbols-outlined text-[24px]">storefront</span>
+          </div>
+          <div>
+            <span class="font-headline font-extrabold text-xl tracking-tight text-primary">LocalShops</span>
+            <span class="block text-[10px] font-semibold text-slate-500 uppercase tracking-widest">Marketplace</span>
+          </div>
+        </a>
+
+        <!-- Store Selector Dropdown -->
+        <div class="hidden md:flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/40">
+          <span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+          <select id="shopFilterSelect" onchange="handleShopChange(this.value)" class="bg-transparent text-xs font-semibold text-on-surface focus:outline-none cursor-pointer">
+            <option value="">All Approved Shops</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Search Input -->
+      <div class="flex-1 max-w-lg hidden sm:block">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-slate-400">
+            <span class="material-symbols-outlined text-[20px]">search</span>
+          </span>
+          <input id="searchInput" type="text" placeholder="Search milk, sourdough, fresh apples, honey..." 
+                 oninput="handleSearch(this.value)"
+                 class="w-full pl-10 pr-4 py-2.5 bg-surface-container-low border border-outline-variant/60 rounded-full text-sm text-on-surface placeholder:text-slate-400 focus:outline-none focus:border-primary focus:bg-white transition-all"/>
+        </div>
+      </div>
+
+      <!-- User Nav & Cart -->
+      <div class="flex items-center gap-3">
+        <!-- Auth User Menu -->
+        <div id="userNavContainer" class="flex items-center gap-2">
+          <!-- Dynamically populated by JS -->
+        </div>
+
+        <!-- Slide-over Cart Trigger Button -->
+        <button onclick="toggleCartDrawer(true)" class="relative flex items-center gap-2 bg-primary hover:bg-primary-container text-white px-4 py-2.5 rounded-full font-headline font-semibold text-sm shadow-md transition-all active:scale-95">
+          <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+          <span class="hidden sm:inline" id="navCartSubtotal">$0.00</span>
+          <span id="navCartCountBadge" class="bg-secondary-container text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Search Bar -->
+    <div class="sm:hidden px-4 pb-3">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-slate-400">
+          <span class="material-symbols-outlined text-[20px]">search</span>
+        </span>
+        <input type="text" placeholder="Search products..." oninput="handleSearch(this.value)"
+               class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant/60 rounded-full text-sm"/>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter & Controls Sub-Navbar -->
+  <div class="bg-white border-b border-surface-container-high py-3 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      
+      <!-- Category Pills -->
+      <div id="categoryPillContainer" class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+        <button onclick="handleCategoryFilter('All')" class="category-btn active px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-primary text-white transition-colors">All</button>
+        <button onclick="handleCategoryFilter('Dairy')" class="category-btn px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors">Dairy & Eggs</button>
+        <button onclick="handleCategoryFilter('Bakery')" class="category-btn px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors">Artisan Bakery</button>
+        <button onclick="handleCategoryFilter('Fruits & Vegetables')" class="category-btn px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors">Fresh Produce</button>
+        <button onclick="handleCategoryFilter('Pantry')" class="category-btn px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors">Pantry & Preserves</button>
+        <button onclick="handleCategoryFilter('Groceries')" class="category-btn px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors">Groceries</button>
+      </div>
+
+      <!-- Controls: In Stock & Sort -->
+      <div class="flex items-center gap-4 shrink-0 self-end md:self-auto">
+        <label class="flex items-center gap-2 text-xs font-semibold text-on-surface cursor-pointer select-none">
+          <input type="checkbox" id="inStockToggle" onchange="handleInStockToggle(this.checked)" class="rounded text-primary focus:ring-primary w-4 h-4"/>
+          <span>In Stock Only</span>
+        </label>
+
+        <select id="sortSelect" onchange="handleSortChange(this.value)" class="text-xs font-semibold bg-surface-container-low border border-outline-variant/60 rounded-lg px-2.5 py-1.5 focus:outline-none">
+          <option value="createdAt,desc">Newest First</option>
+          <option value="price,asc">Price: Low to High</option>
+          <option value="price,desc">Price: High to Low</option>
+          <option value="name,asc">Name: A to Z</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <!-- Hero / Active Filter Banner -->
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-bold font-headline text-on-surface" id="catalogTitle">Fresh Local Produce & Artisan Goods</h1>
+        <p class="text-sm text-slate-500 mt-1" id="catalogSubtitle">Showing fresh inventory from verified neighborhood sellers.</p>
+      </div>
+      <span class="text-xs font-bold text-slate-500 bg-surface-container-high px-3 py-1.5 rounded-full self-start" id="itemCountLabel">Loading products...</span>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Dynamically filled with product cards -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyCatalogState" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-outline-variant/60 my-6">
+      <div class="w-16 h-16 mx-auto rounded-full bg-surface-container flex items-center justify-center text-slate-400 mb-4">
+        <span class="material-symbols-outlined text-[32px]">inventory_2</span>
+      </div>
+      <h3 class="font-headline font-bold text-lg text-on-surface">No products found</h3>
+      <p class="text-sm text-slate-500 max-w-sm mx-auto mt-1">Try relaxing your search terms, choosing a different category, or selecting another shop.</p>
+      <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-primary text-white text-xs font-semibold rounded-full hover:bg-primary-container transition-colors">Reset All Filters</button>
+    </div>
+  </main>
+
+  <!-- Slide-Over Cart Drawer -->
+  <div id="cartModalRoot" class="fixed inset-0 z-50 overflow-hidden pointer-events-none hidden transition-opacity">
+    <!-- Backdrop -->
+    <div id="cartBackdrop" onclick="toggleCartDrawer(false)" class="absolute inset-0 bg-stone-900/40 backdrop-blur-xs transition-opacity duration-300 opacity-0 pointer-events-auto"></div>
+    
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10 pointer-events-auto">
+      <div id="cartDrawerContent" class="w-screen max-w-md bg-white shadow-2xl flex flex-col h-full transform transition ease-in-out duration-300 translate-x-full">
+        
+        <!-- Drawer Header -->
+        <div class="px-6 py-5 bg-white border-b border-surface-container flex items-center justify-between shadow-xs z-10">
+          <div class="flex items-center gap-3">
+            <h2 class="font-headline font-bold text-xl text-on-surface">Your Cart</h2>
+            <span id="drawerItemCountBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary">0 items</span>
+          </div>
+          <button aria-label="Close cart drawer" onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full hover:bg-surface-container text-slate-500 hover:text-on-surface flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-[22px]">close</span>
+          </button>
+        </div>
+
+        <!-- Single Store Rule Banner -->
+        <div id="singleShopBanner" class="bg-surface-container-low px-6 py-3 border-b border-surface-container flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[18px]">store</span>
+          </div>
+          <div class="text-left leading-tight text-xs">
+            <p class="font-semibold text-on-surface">Single Hub Order Guarantee</p>
+            <p class="text-slate-500">All items are delivered together from <span id="cartShopName" class="font-bold text-primary">Green Valley Organics</span></p>
+          </div>
+        </div>
+
+        <!-- Cart Items Scroll Area -->
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Empty Cart Display -->
+        <div id="emptyCartView" class="hidden flex-1 flex flex-col items-center justify-center p-6 text-center text-slate-400">
+          <span class="material-symbols-outlined text-[48px] text-slate-300 mb-2">shopping_basket</span>
+          <p class="font-headline font-semibold text-slate-700">Your basket is empty</p>
+          <p class="text-xs text-slate-500 mt-1">Discover fresh farm goods from our local sellers</p>
+          <button onclick="toggleCartDrawer(false)" class="mt-4 px-4 py-2 rounded-full bg-primary text-white text-xs font-semibold">Start Shopping</button>
+        </div>
+
+        <!-- Drawer Footer & Checkout CTA -->
+        <div id="cartFooterSection" class="p-6 bg-surface-container-low border-t border-surface-container space-y-3">
+          <div class="space-y-1.5 text-xs text-slate-600">
+            <div class="flex justify-between">
+              <span>Items Subtotal</span>
+              <span id="drawerSubtotal" class="font-semibold text-on-surface">$0.00</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Estimated Tax (5%)</span>
+              <span id="drawerTax" class="font-semibold text-on-surface">$0.00</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Direct Local Courier</span>
+              <span class="font-semibold text-primary">+$2.50</span>
+            </div>
+            <div class="border-t border-outline-variant/40 pt-2 flex justify-between text-base font-bold text-on-surface">
+              <span>Order Total</span>
+              <span id="drawerGrandTotal" class="text-primary font-headline text-lg">$0.00</span>
+            </div>
+          </div>
+
+          <a href="checkout.html" class="w-full h-12 bg-primary hover:bg-primary-container text-white font-headline font-bold rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-98">
+            <span>Proceed to Checkout</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Detail Native Dialog (Modern Web Guidance Compliant) -->
+  <dialog id="productDetailDialog" aria-labelledby="modalProductTitle" class="rounded-3xl p-0 w-full max-w-2xl bg-white shadow-2xl border border-surface-container">
+    <div class="relative p-6 sm:p-8">
+      <!-- Close button -->
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high text-slate-600 flex items-center justify-center transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Image Gallery -->
+        <div class="aspect-square rounded-2xl overflow-hidden bg-surface-container-low border border-surface-container">
+          <img id="modalProductImage" src="" alt="Product view" class="w-full h-full object-cover"/>
+        </div>
+
+        <!-- Product Info -->
+        <div class="flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-2">
+              <span class="material-symbols-outlined text-[14px]">storefront</span>
+              <span id="modalProductShop">Local Shop</span>
+            </div>
+            <h2 id="modalProductTitle" class="font-headline font-bold text-xl text-on-surface">Product Name</h2>
+            <div class="flex items-baseline gap-2 mt-2">
+              <span id="modalProductPrice" class="font-headline font-extrabold text-2xl text-primary">$0.00</span>
+              <span id="modalProductStockBadge" class="text-xs px-2 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-800">In Stock</span>
+            </div>
+            <p id="modalProductCategory" class="text-xs text-slate-400 uppercase font-semibold mt-1">Category</p>
+            <p id="modalProductDescription" class="text-sm text-slate-600 mt-4 leading-relaxed">Product description...</p>
+          </div>
+
+          <!-- Add Action -->
+          <div class="mt-6 pt-4 border-t border-surface-container">
+            <button id="modalAddToCartBtn" class="w-full h-11 bg-primary hover:bg-primary-container text-white font-headline font-bold rounded-xl shadow-md flex items-center justify-center gap-2 transition-all">
+              <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+              <span>Add to Cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Store Conflict Confirmation Modal -->
+  <dialog id="shopConflictDialog" class="rounded-2xl p-6 max-w-md w-full bg-white shadow-2xl border border-surface-container text-center">
+    <div class="w-12 h-12 mx-auto rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
+      <span class="material-symbols-outlined text-[28px]">store</span>
+    </div>
+    <h3 class="font-headline font-bold text-lg text-on-surface">Start a new order?</h3>
+    <p class="text-sm text-slate-600 mt-2">
+      Your cart currently contains items from <strong id="conflictCurrentShop" class="text-primary font-semibold">Shop A</strong>.
+      You can only order from one local store at a time.
+    </p>
+    <p class="text-xs text-slate-500 mt-2">
+      Would you like to clear your current cart and add items from <strong id="conflictNewShop" class="text-primary font-semibold">Shop B</strong>?
+    </p>
+    <div class="mt-6 flex gap-3">
+      <button onclick="document.getElementById('shopConflictDialog').close()" class="flex-1 py-2.5 rounded-xl border border-outline-variant text-sm font-semibold text-slate-700 hover:bg-surface-container transition-colors">Keep Current</button>
+      <button id="btnConfirmCartReplace" class="flex-1 py-2.5 rounded-xl bg-primary text-white text-sm font-bold shadow-md hover:bg-primary-container transition-colors">Clear &amp; Add</button>
+    </div>
+  </dialog>
+
+  <!-- Page Footer -->
+  <footer class="mt-auto bg-white border-t border-surface-container py-8 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-headline font-bold text-sm text-primary">LocalShops Marketplace</span>
+        <span>• Fresh directly from local producers</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="auth.html" class="hover:text-primary transition-colors">Merchant Portal</a>
+        <a href="checkout.html" class="hover:text-primary transition-colors">Checkout</a>
+        <a href="#" onclick="api.logout(); return false;" class="hover:text-red-600 transition-colors">Sign Out</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    let currentFilters = {
+      shopId: null,
+      category: 'All',
+      inStock: null,
+      search: '',
+      sort: 'createdAt,desc'
+    };
+
+    let allShops = [];
+    let currentProducts = [];
+    let pendingConflict = null;
+
+    // -------------------------------------------------------------
+    // Initialization
+    // -------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', async () => {
+      renderUserNav();
+      await loadShops();
+      await fetchAndRenderProducts();
+      renderCartUI();
+
+      window.addEventListener('cart-updated', () => {
+        renderCartUI();
+        updateProductGridCounters();
+      });
+    });
+
+    // -------------------------------------------------------------
+    // User Navigation Bar (Role specific)
+    // -------------------------------------------------------------
+    function renderUserNav() {
+      const container = document.getElementById('userNavContainer');
+      const user = api.getUser();
+
+      if (user) {
+        let badge = user.role === 'SHOP_OWNER' ? 'Shop Owner' : (user.role === 'ADMIN' ? 'Admin' : 'Customer');
+        let extraLink = '';
+        if (user.role === 'SHOP_OWNER' || user.role === 'ADMIN') {
+          extraLink = `<a href="dashboard.html" class="hidden md:inline-flex items-center gap-1 text-xs font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full hover:bg-primary/20 transition-colors">
+            <span class="material-symbols-outlined text-[16px]">dashboard</span>
+            <span>Shop Dashboard</span>
+          </a>`;
+        }
+
+        container.innerHTML = `
+          ${extraLink}
+          <div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/40">
+            <div class="w-6 h-6 rounded-full bg-primary text-white text-xs flex items-center justify-center font-bold">
+              ${user.name.charAt(0).toUpperCase()}
+            </div>
+            <span class="text-xs font-semibold text-on-surface truncate max-w-[100px]">${user.name}</span>
+            <span class="text-[10px] font-bold text-slate-400">(${badge})</span>
+            <button onclick="api.logout()" title="Logout" class="text-slate-400 hover:text-red-600 transition-colors ml-1">
+              <span class="material-symbols-outlined text-[16px]">logout</span>
+            </button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <a href="auth.html" class="flex items-center gap-1 text-xs font-bold text-primary hover:text-primary-container px-3 py-2 rounded-full border border-primary/30 transition-colors">
+            <span class="material-symbols-outlined text-[16px]">person</span>
+            <span>Sign In</span>
+          </a>
+        `;
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Load Approved Shops
+    // -------------------------------------------------------------
+    async function loadShops() {
+      try {
+        const res = await api.getShops();
+        allShops = res.content || [];
+        const select = document.getElementById('shopFilterSelect');
+        select.innerHTML = '<option value="">All Approved Shops</option>';
+        allShops.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = `${s.name} (${s.area || 'Bangalore'})`;
+          select.appendChild(opt);
+        });
+      } catch (e) {
+        console.error('Failed to load shops:', e);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Fetch Products & Render Grid
+    // -------------------------------------------------------------
+    async function fetchAndRenderProducts() {
+      const grid = document.getElementById('productGrid');
+      const emptyState = document.getElementById('emptyCatalogState');
+      const countLabel = document.getElementById('itemCountLabel');
+
+      grid.innerHTML = '<div class="col-span-full py-12 text-center text-slate-400 font-medium">Refreshing farm fresh goods...</div>';
+
+      try {
+        const res = await api.getProducts(currentFilters);
+        currentProducts = res.content || [];
+        
+        countLabel.textContent = `${res.totalElements || currentProducts.length} items found`;
+
+        if (currentProducts.length === 0) {
+          grid.innerHTML = '';
+          emptyState.classList.remove('hidden');
+          return;
+        }
+
+        emptyState.classList.add('hidden');
+        grid.innerHTML = currentProducts.map(p => createProductCardHtml(p)).join('');
+        updateProductGridCounters();
+      } catch (err) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-red-500 font-medium">Failed to load products: ${err.message}</div>`;
+      }
+    }
+
+    function createProductCardHtml(p) {
+      const inStock = p.stock > 0;
+      const img = p.imageUrl || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60';
+      const stockBadge = inStock 
+        ? `<span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">${p.stock} left</span>`
+        : `<span class="text-[11px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">Out of Stock</span>`;
+
+      return `
+        <div class="bg-white rounded-2xl border border-surface-container overflow-hidden shadow-xs hover:shadow-lg transition-all duration-200 flex flex-col group ${!inStock ? 'opacity-75' : ''}">
+          <!-- Card Image & Quick Details Click -->
+          <div onclick="openProductModal(${p.id})" class="relative aspect-square overflow-hidden bg-surface-container-low cursor-pointer">
+            <img src="${img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <div class="absolute top-3 left-3">
+              <span class="inline-flex items-center gap-1 bg-white/95 backdrop-blur-xs text-[10px] font-bold text-on-surface px-2.5 py-1 rounded-full shadow-xs">
+                <span class="material-symbols-outlined text-[13px] text-primary">storefront</span>
+                ${p.shopName || 'Local Shop'}
+              </span>
+            </div>
+            <div class="absolute top-3 right-3">
+              ${stockBadge}
+            </div>
+          </div>
+
+          <!-- Card Body -->
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">${p.category || 'Pantry'}</span>
+              <h3 onclick="openProductModal(${p.id})" class="font-headline font-bold text-base text-on-surface hover:text-primary transition-colors cursor-pointer line-clamp-1 mt-0.5">${p.name}</h3>
+              <p class="text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed">${p.description || 'Farm-fresh quality directly from trusted local purveyors.'}</p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between">
+              <div>
+                <span class="text-xs text-slate-400 font-medium">Price</span>
+                <p class="font-headline font-extrabold text-lg text-primary">$${Number(p.price).toFixed(2)}</p>
+              </div>
+
+              <!-- Action Button / Counter -->
+              <div id="product-action-${p.id}">
+                ${inStock ? `
+                  <button onclick="handleAddToCart(${p.id})" class="h-9 px-4 rounded-full bg-primary hover:bg-primary-container text-white font-headline font-bold text-xs shadow-sm flex items-center gap-1 transition-all active:scale-95">
+                    <span class="material-symbols-outlined text-[16px]">add</span>
+                    <span>Add</span>
+                  </button>
+                ` : `
+                  <button disabled class="h-9 px-3 rounded-full bg-slate-100 text-slate-400 font-bold text-xs cursor-not-allowed">Sold Out</button>
+                `}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateProductGridCounters() {
+      const cart = api.getCart();
+      currentProducts.forEach(p => {
+        const container = document.getElementById(`product-action-${p.id}`);
+        if (!container || p.stock <= 0) return;
+
+        const inCart = cart.items.find(i => i.productId === p.id);
+        if (inCart) {
+          container.innerHTML = `
+            <div class="flex items-center gap-1.5 bg-primary/10 rounded-full px-2 py-1">
+              <button onclick="handleQuantityChange(${p.id}, ${inCart.quantity - 1})" class="w-6 h-6 rounded-full bg-white text-primary font-bold flex items-center justify-center hover:bg-primary hover:text-white transition-colors shadow-xs">-</button>
+              <span class="text-xs font-bold text-primary px-1">${inCart.quantity}</span>
+              <button onclick="handleQuantityChange(${p.id}, ${inCart.quantity + 1})" class="w-6 h-6 rounded-full bg-white text-primary font-bold flex items-center justify-center hover:bg-primary hover:text-white transition-colors shadow-xs">+</button>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <button onclick="handleAddToCart(${p.id})" class="h-9 px-4 rounded-full bg-primary hover:bg-primary-container text-white font-headline font-bold text-xs shadow-sm flex items-center gap-1 transition-all active:scale-95">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add</span>
+            </button>
+          `;
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Cart Interaction & Single-Store Enforcement
+    // -------------------------------------------------------------
+    function handleAddToCart(productId) {
+      const product = currentProducts.find(p => p.id === productId);
+      if (!product) return;
+
+      const res = api.addToCart(product, 1);
+      if (res.conflict) {
+        // Trigger Single Shop Conflict Dialog
+        pendingConflict = { product, quantity: 1 };
+        document.getElementById('conflictCurrentShop').textContent = res.currentShopName;
+        document.getElementById('conflictNewShop').textContent = res.newShopName;
+        
+        document.getElementById('btnConfirmCartReplace').onclick = () => {
+          api.clearCart();
+          api.addToCart(pendingConflict.product, pendingConflict.quantity);
+          document.getElementById('shopConflictDialog').close();
+          api.showToast(`Basket reset! Added items from ${res.newShopName}`);
+          toggleCartDrawer(true);
+        };
+
+        document.getElementById('shopConflictDialog').showModal();
+        return;
+      }
+
+      api.showToast(`Added ${product.name} to basket!`);
+      toggleCartDrawer(true);
+    }
+
+    function handleQuantityChange(productId, quantity) {
+      api.updateCartQuantity(productId, quantity);
+    }
+
+    function renderCartUI() {
+      const cart = api.getCart();
+      const count = api.getCartCount();
+      const subtotal = api.getCartSubtotal();
+      const tax = subtotal * 0.05;
+      const delivery = count > 0 ? 2.50 : 0.00;
+      const grandTotal = subtotal + tax + delivery;
+
+      // Nav badges
+      document.getElementById('navCartCountBadge').textContent = count;
+      document.getElementById('navCartSubtotal').textContent = api.formatCurrency(grandTotal);
+
+      // Drawer Header & Subtotals
+      document.getElementById('drawerItemCountBadge').textContent = `${count} items`;
+      document.getElementById('drawerSubtotal').textContent = api.formatCurrency(subtotal);
+      document.getElementById('drawerTax').textContent = api.formatCurrency(tax);
+      document.getElementById('drawerGrandTotal').textContent = api.formatCurrency(grandTotal);
+
+      const itemsContainer = document.getElementById('cartItemsContainer');
+      const emptyView = document.getElementById('emptyCartView');
+      const footerSection = document.getElementById('cartFooterSection');
+      const singleShopBanner = document.getElementById('singleShopBanner');
+
+      if (count === 0) {
+        itemsContainer.innerHTML = '';
+        emptyView.classList.remove('hidden');
+        footerSection.classList.add('hidden');
+        singleShopBanner.classList.add('hidden');
+        return;
+      }
+
+      emptyView.classList.add('hidden');
+      footerSection.classList.remove('hidden');
+      singleShopBanner.classList.remove('hidden');
+      document.getElementById('cartShopName').textContent = cart.shopName || 'Local Shop';
+
+      itemsContainer.innerHTML = cart.items.map(item => `
+        <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl border border-surface-container">
+          <img src="${item.imageUrl}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg"/>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-headline font-semibold text-xs text-on-surface truncate">${item.name}</h4>
+            <p class="text-xs font-bold text-primary mt-0.5">$${item.price.toFixed(2)}</p>
+          </div>
+          
+          <div class="flex items-center gap-1 bg-white rounded-lg px-2 py-1 border border-outline-variant/50">
+            <button onclick="handleQuantityChange(${item.productId}, ${item.quantity - 1})" class="text-xs font-bold text-slate-500 hover:text-primary px-1">-</button>
+            <span class="text-xs font-bold text-on-surface px-1">${item.quantity}</span>
+            <button onclick="handleQuantityChange(${item.productId}, ${item.quantity + 1})" class="text-xs font-bold text-slate-500 hover:text-primary px-1">+</button>
+          </div>
+
+          <button onclick="api.removeFromCart(${item.productId})" class="text-slate-400 hover:text-red-600 transition-colors">
+            <span class="material-symbols-outlined text-[18px]">delete</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function toggleCartDrawer(open) {
+      const modal = document.getElementById('cartModalRoot');
+      const drawer = document.getElementById('cartDrawerContent');
+      const backdrop = document.getElementById('cartBackdrop');
+
+      if (open) {
+        modal.classList.remove('pointer-events-none', 'hidden');
+        drawer.classList.remove('translate-x-full');
+        drawer.classList.add('translate-x-0');
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.remove('translate-x-0');
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        }, 300);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Product Detail Modal (Modern Web Guidance Native Dialog)
+    // -------------------------------------------------------------
+    function openProductModal(productId) {
+      const product = currentProducts.find(p => p.id === productId);
+      if (!product) return;
+
+      document.getElementById('modalProductTitle').textContent = product.name;
+      document.getElementById('modalProductShop').textContent = product.shopName || 'Local Shop';
+      document.getElementById('modalProductPrice').textContent = `$${Number(product.price).toFixed(2)}`;
+      document.getElementById('modalProductCategory').textContent = product.category || 'General';
+      document.getElementById('modalProductDescription').textContent = product.description || 'Artisan and locally produced goods fresh from neighborhood stores.';
+      document.getElementById('modalProductImage').src = product.imageUrl || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60';
+      
+      const inStock = product.stock > 0;
+      const stockBadge = document.getElementById('modalProductStockBadge');
+      const addBtn = document.getElementById('modalAddToCartBtn');
+
+      if (inStock) {
+        stockBadge.className = 'text-xs px-2 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-800';
+        stockBadge.textContent = `In Stock (${product.stock} available)`;
+        addBtn.disabled = false;
+        addBtn.className = 'w-full h-11 bg-primary hover:bg-primary-container text-white font-headline font-bold rounded-xl shadow-md flex items-center justify-center gap-2 transition-all';
+        addBtn.onclick = () => {
+          handleAddToCart(product.id);
+          closeProductModal();
+        };
+      } else {
+        stockBadge.className = 'text-xs px-2 py-0.5 rounded-full font-semibold bg-red-100 text-red-800';
+        stockBadge.textContent = 'Out of Stock';
+        addBtn.disabled = true;
+        addBtn.className = 'w-full h-11 bg-slate-200 text-slate-400 font-bold rounded-xl cursor-not-allowed flex items-center justify-center gap-2';
+      }
+
+      document.getElementById('productDetailDialog').showModal();
+    }
+
+    function closeProductModal() {
+      document.getElementById('productDetailDialog').close();
+    }
+
+    // -------------------------------------------------------------
+    // Filter Handlers
+    // -------------------------------------------------------------
+    let searchTimeout = null;
+    function handleSearch(val) {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        currentFilters.search = val.trim();
+        fetchAndRenderProducts();
+      }, 300);
+    }
+
+    function handleShopChange(shopId) {
+      currentFilters.shopId = shopId || null;
+      fetchAndRenderProducts();
+    }
+
+    function handleCategoryFilter(cat) {
+      currentFilters.category = cat;
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        if (btn.textContent.trim().toLowerCase().includes(cat.toLowerCase()) || (cat === 'All' && btn.textContent.trim() === 'All')) {
+          btn.className = 'category-btn active px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-primary text-white transition-colors';
+        } else {
+          btn.className = 'category-btn px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors';
+        }
+      });
+      fetchAndRenderProducts();
+    }
+
+    function handleInStockToggle(checked) {
+      currentFilters.inStock = checked ? true : null;
+      fetchAndRenderProducts();
+    }
+
+    function handleSortChange(sort) {
+      currentFilters.sort = sort;
+      fetchAndRenderProducts();
+    }
+
+    function resetFilters() {
+      currentFilters = { shopId: null, category: 'All', inStock: null, search: '', sort: 'createdAt,desc' };
+      document.getElementById('searchInput').value = '';
+      document.getElementById('inStockToggle').checked = false;
+      document.getElementById('shopFilterSelect').value = '';
+      handleCategoryFilter('All');
+    }
+  </script>
+</body>
+</html>

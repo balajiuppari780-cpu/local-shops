@@ -1,0 +1,593 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="api.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="api.js"></script><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container":"#f6ece6","on-primary-container":"#f5fff7","secondary-fixed-dim":"#ffb77d","on-primary":"#ffffff","tertiary":"#006194","secondary-container":"#fe932c","outline":"#6d7a72","on-tertiary-fixed":"#001d31","error-container":"#ffdad6","primary-container":"#00855d","secondary-fixed":"#ffdcc3","on-surface-variant":"#3d4a42","on-tertiary-fixed-variant":"#004b73","inverse-primary":"#68dba9","primary-fixed":"#85f8c4","on-primary-fixed-variant":"#005137","inverse-surface":"#342f2b","on-secondary-fixed":"#2f1500","secondary":"#904d00","on-primary-fixed":"#002114","surface-tint":"#006c4a","on-surface":"#1f1b17","surface-dim":"#e2d8d2","inverse-on-surface":"#f9efe8","error":"#ba1a1a","tertiary-fixed-dim":"#93ccff","surface-bright":"#fff8f5","surface-variant":"#eae1da","on-error":"#ffffff","surface-container-lowest":"#ffffff","surface-container-high":"#f0e6e0","surface":"#fff8f5","on-secondary-fixed-variant":"#6e3900","primary-fixed-dim":"#68dba9","surface-container-low":"#fcf2eb","tertiary-container":"#007bb9","primary":"#006948","tertiary-fixed":"#cce5ff","on-error-container":"#93000a","on-tertiary":"#ffffff","on-background":"#1f1b17","on-tertiary-container":"#fdfcff","on-secondary":"#ffffff","outline-variant":"#bccac0","background":"#fff8f5","on-secondary-container":"#663500","surface-container-highest":"#eae1da"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{margin:"2rem","space-sm":"0.5rem","space-md":"1rem","space-xl":"2.5rem","margin-mobile":"1rem",gutter:"1.5rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter-mobile":"1rem"},fontFamily:{"label-sm":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"body-sm":["Inter"],"display-hero-mobile":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-md":["Inter"],"label-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-lg":["Inter"],"headline-md":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"]},fontSize:{"label-sm":["11px",{lineHeight:"14px",fontWeight:"600"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"label-lg":["14px",{lineHeight:"20px",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"display-hero-mobile":["32px",{lineHeight:"40px",fontWeight:"700"}],"headline-lg-mobile":["24px",{lineHeight:"32px",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"headline-md":["24px",{lineHeight:"32px",fontWeight:"600"}],"display-hero":["48px",{lineHeight:"56px",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased" data-mode="connect"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl border-b border-surface-container shadow-sm"><div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin h-16 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-xs" data-path="marketplace-home" href="#"><span class="material-symbols-outlined text-primary text-[28px]">storefront</span><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">LocalHarvest</span></a><div class="h-4 w-px bg-outline-variant hidden sm:block"></div><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 hidden sm:flex" href="#"><span class="material-symbols-outlined text-[16px]">arrow_back</span><span class="">Back to Cart</span></a></div><div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-label-sm font-medium shadow-sm"><span class="material-symbols-outlined text-primary text-[15px]">lock</span><span class="">Secure Checkout</span></div><div class="flex items-center gap-space-md"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors hidden sm:flex items-center gap-1" href="#"><span class="material-symbols-outlined text-[16px]">help_outline</span><span class="">Need Help?</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle decorative ambient background elements -->
+<div class="relative w-full max-w-[1280px] mx-auto px-margin-mobile lg:px-margin pb-space-xl">
+<div class="absolute -top-10 right-10 w-96 h-96 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-96 -left-16 w-80 h-80 bg-secondary-fixed/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Breadcrumb & Store Context Top Bar -->
+<section class="py-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm"><div class="flex flex-col gap-1 py-2"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm mb-1"><a class="hover:text-primary transition-colors flex items-center gap-0.5" href="#"><span class="material-symbols-outlined text-[14px]">arrow_back</span>Cart</a><span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span><span class="text-primary font-semibold">Checkout</span></div><h1 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Express Checkout</h1><p class="font-body-md text-body-md text-on-surface-variant">Ordering from <span class="font-semibold text-on-surface">Green Valley Organics</span> • Direct Farm Courier</p></div><div class="flex items-center gap-space-sm self-start md:self-auto bg-surface-container-lowest px-4 py-2 rounded-xl shadow-sm border border-surface-container-high"><span class="material-symbols-outlined text-primary text-[20px]">near_me</span><div class="text-left"><div class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Hub Proximity</div><div class="font-label-md text-label-md text-on-surface font-bold">1.2 miles away <span class="text-primary font-normal">(18–25 min transit)</span></div></div></div></section>
+<!-- Main Two-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mt-space-sm items-start">
+<!-- LEFT COLUMN: Checkout Details (7 cols) -->
+<section class="lg:col-span-7 flex flex-col gap-gutter">
+<!-- Delivery Address Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm relative overflow-hidden transition-all duration-200 hover:shadow-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">pin_drop</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-bold">Step 1</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Delivery Address</h2>
+</div>
+</div>
+<button class="font-label-md text-label-md text-primary hover:text-primary-container font-semibold transition-colors flex items-center gap-1 px-3 py-1 rounded-lg hover:bg-surface-container-low" id="edit-address-btn">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span class="">Edit</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md mt-space-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Sarah Jenkins</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm">Primary Home</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">home</span>
+                742 Evergreen Terrace, Springfield, OR 97477
+              </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">call</span>
+                +1 (555) 234-5678
+              </p>
+</div>
+<div class="flex items-center gap-2 text-primary font-label-sm text-label-sm bg-surface-container-lowest px-3 py-2 rounded-lg shadow-sm shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="">Geo-verified drop</span>
+</div>
+</div>
+<!-- Hidden inline editor for address demonstration -->
+<div class="hidden mt-space-md pt-space-md space-y-space-sm bg-surface-container-lowest" id="address-editor">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<input class="w-full h-11 px-3 bg-surface-container-low rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Full Name" type="text" value="Sarah Jenkins">
+<input class="w-full h-11 px-3 bg-surface-container-low rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Phone Number" type="text" value="+1 (555) 234-5678">
+</div>
+<input class="w-full h-11 px-3 bg-surface-container-low rounded-lg text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Street Address" type="text" value="742 Evergreen Terrace, Springfield, OR 97477">
+<div class="flex justify-end gap-2 pt-2">
+<button class="px-4 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low rounded-lg" id="cancel-address-btn">Cancel</button>
+<button class="px-4 py-2 font-label-md text-label-md bg-primary text-on-primary rounded-lg shadow-sm hover:bg-primary-container" id="save-address-btn">Update Details</button>
+</div>
+</div>
+</div>
+<!-- Delivery Notes & Instructions -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center gap-space-sm mb-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">chat_bubble_outline</span>
+</div>
+<div class="">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-bold">Step 2</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Delivery &amp; Shop Instructions <span class="font-normal text-on-surface-variant font-body-sm text-body-sm">(Optional)</span></h2>
+</div>
+</div>
+<div class="relative">
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-outline resize-none transition-all" id="delivery-note" placeholder="E.g., Please leave near the side porch door. Ring the bell twice. Thank you!" rows="3">Please leave near the side porch door. Thank you!</textarea>
+<div class="absolute bottom-3 right-3 flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant/80">
+<span class="material-symbols-outlined text-[14px]">eco</span>
+<span class="">Courier notified upon packing</span>
+</div>
+</div>
+</div>
+<!-- Payment Method Selection -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-bold">Step 3</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Payment Method</h2>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-fixed/50 px-2.5 py-1 rounded-full font-semibold">Zero upfront surcharge</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md" id="payment-options">
+<!-- Option 1: Cash on Delivery -->
+<label class="payment-card relative flex flex-col p-space-md rounded-xl bg-surface-container-low cursor-pointer transition-all duration-200 shadow-sm ring-2 ring-primary">
+<input checked="" class="sr-only" name="payment-method" type="radio" value="cod">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">local_atm</span>
+</div>
+<div class="radio-indicator w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Cash on Delivery</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">Pay directly to our certified farm courier upon receipt. Exact change appreciated.</p>
+<div class="mt-3 pt-2 flex items-center gap-1 font-label-sm text-label-sm text-primary">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span class="">Pre-selected for freshness check</span>
+</div>
+</label>
+<!-- Option 2: Card on Delivery -->
+<label class="payment-card relative flex flex-col p-space-md rounded-xl bg-surface-container-low cursor-pointer transition-all duration-200 opacity-90 hover:opacity-100">
+<input class="sr-only" name="payment-method" type="radio" value="card_on_delivery">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[24px]">contactless</span>
+</div>
+<div class="radio-indicator w-5 h-5 rounded-full bg-surface-variant flex items-center justify-center text-transparent">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Card on Delivery</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">Mobile contactless POS reader with courier (Visa, Mastercard, Apple Pay &amp; Google Pay).</p>
+<div class="mt-3 pt-2 flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px]">security</span>
+<span class="">Encrypted offline sync</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Checkout Action & Safety Guarantee -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="space-y-1 text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-1.5 text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span class="font-bold">Safe &amp; atomic stock reservation</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your harvest items are reserved immediately at Green Valley Organics storage.</p>
+</div>
+<button class="w-full sm:w-auto px-8 h-12 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 shrink-0 active:scale-[0.98]" id="place-order-button" onclick="handlePlaceOrder()">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+<span class="">Place Order ($18.75)</span>
+</button>
+</div>
+<div class="pt-space-sm flex flex-wrap items-center justify-between gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface-container-low px-4 py-2.5 rounded-lg">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+<span class="">100% Contactless Direct Farm Delivery</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">timelapse</span>
+<span class="">14-min grace window to cancel or edit</span>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN: Order Summary & Hub Breakdown (5 cols) -->
+<section class="lg:col-span-5 flex flex-col gap-gutter">
+<!-- Shop Attribution Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden shadow-sm shrink-0 bg-surface-container-high flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Close up photograph of a rustic, sunlit local organic farm stand sign with fresh vegetables and wood texture, emerald tone accent" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDbc9CH8hkP2yeX76SBpXk9C901z8IKNEX4MXdDabcEeYNkz_uJj-_iuFz4FmjfA0k8ovM_F99lMDa1luZYKwlN1Eg8HzFQ_hDutZ4DpImYzoqb1LKmN0Z7p6MEed_9KwpKnGL3Lu_2xbOAhfEbRm56Fi1BBF2mR1C_5_mJ-uNKz1cuTKS-mP05yUsXMwwQrCeQMXgUixQnIDNW-5paD6JDDc68StV7g0XF15CoQwo">
+</div>
+<div>
+<div class="flex items-center gap-1">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Green Valley Organics</span>
+<span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Single Hub Order Verified • Direct Courier</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">Tier 1 Partner</span>
+</div>
+<!-- Line Items Cart Review -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold" id="checkoutGoodsCountHeader">Cart Goods (0 items)</h3>
+<span class="font-label-sm text-label-sm text-primary bg-surface-container-low px-2.5 py-0.5 rounded-full">Harvested Today</span>
+</div>
+<div class="space-y-space-sm" id="checkoutGoodsList">
+<!-- Dynamically populated from api.getCart() -->
+</div>
+<!-- Total Breakdown Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md space-y-2 mt-space-sm">
+<div class="flex justify-between items-center text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Items Subtotal</span>
+<span id="checkoutSubtotal" class="text-on-surface font-semibold">$0.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="">Estimated County Tax</span>
+<span class="material-symbols-outlined text-[13px] text-outline" title="Standard state and local agricultural rates">info</span>
+</span>
+<span id="checkoutTax" class="text-on-surface font-semibold">$0.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="">Direct Hub Courier</span>
+<span class="px-1.5 py-0.2 bg-primary-fixed text-on-primary-fixed rounded text-[10px] font-bold">ECO-VAN</span>
+</span>
+<span class="text-on-surface font-semibold">$2.50</span>
+</div>
+<!-- Visual Separator via background shift -->
+<div class="h-px bg-surface-variant my-2"></div>
+<div class="flex justify-between items-baseline pt-1">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Total Due</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pay upon dropoff</span>
+</div>
+<div class="text-right">
+<span id="checkoutTotal" class="font-display-hero-mobile text-display-hero-mobile text-primary font-bold tracking-tight">$0.00</span>
+</div>
+</div>
+</div>
+<!-- Sustainable Packaging Note -->
+<div class="p-space-sm bg-surface-container-high rounded-xl flex items-start gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">recycling</span>
+<p class="font-body-sm text-body-sm leading-snug">
+              Packaged in 100% compostable Kraft tote bags with chill packs returnable on your next neighborhood order.
+            </p>
+</div>
+</div>
+</section>
+</div>
+<!-- POST-ORDER CONFIRMATION & LIVE TRACKING SECTION -->
+<section class="mt-space-xl bg-surface-container-lowest rounded-xl p-space-lg lg:p-space-xl shadow-lg relative overflow-hidden" id="order-status-card" class="hidden bg-surface-container-lowest rounded-2xl p-space-lg md:p-space-xl shadow-lg relative overflow-hidden my-6 border-2 border-primary/20">
+<!-- Decorative status glow bar -->
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-primary-container to-secondary-container"></div>
+<!-- Success Header Banner -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md pb-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-md shrink-0">
+<span class="material-symbols-outlined text-[28px]">check_circle</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Order #LS-8942 Placed Successfully!</span>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold">Live Hub Sync</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Green Valley Organics is reviewing your basket for harvest allocation.</p>
+</div>
+</div>
+<div class="flex items-center gap-2 self-stretch md:self-auto justify-end">
+<button class="px-4 py-2 bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-xl transition-colors flex items-center gap-1.5" id="sms-updates-btn">
+<span class="material-symbols-outlined text-[18px] text-primary">sms</span>
+<span class="">Get SMS Updates</span>
+</button>
+<div class="relative group">
+<button class="px-4 py-2 bg-error-container text-on-error-container hover:bg-error/20 font-label-md text-label-md rounded-xl transition-colors flex items-center gap-1.5" id="cancel-order-btn">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span class="">Cancel Order</span>
+</button>
+<!-- Tooltip -->
+<div class="absolute bottom-full right-0 mb-2 hidden group-hover:block w-64 p-2 bg-inverse-surface text-inverse-on-surface font-body-sm text-body-sm rounded-lg shadow-xl z-20 pointer-events-none text-center">
+              Active only before packed — 14 mins remaining to modify or cancel
+            </div>
+</div>
+</div>
+</div>
+<!-- 4-Step Horizontal Progress Tracker -->
+<div class="py-space-md bg-surface-container-low rounded-xl px-space-md lg:px-space-lg my-space-md">
+<div class="relative flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-2">
+<!-- Desktop Connecting Bar behind steps -->
+<div class="hidden md:block absolute top-6 left-12 right-12 h-1 bg-surface-variant -z-0">
+<div class="h-full bg-primary w-1/3 transition-all duration-500"></div>
+</div>
+<!-- Step 1: Placed (Completed) -->
+<div class="flex md:flex-col items-center md:items-center gap-3 md:gap-2 z-10 w-full md:w-1/4">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md shrink-0">
+<span class="material-symbols-outlined text-[24px]">done_all</span>
+</div>
+<div class="text-left md:text-center">
+<div class="flex items-center md:justify-center gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">1. Placed</span>
+<span class="material-symbols-outlined text-primary text-[14px]">check</span>
+</div>
+<span class="font-body-sm text-body-sm text-primary font-semibold">10:14 AM</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant hidden md:block">System registered</p>
+</div>
+</div>
+<!-- Step 2: Accepted by Shop (Active / Pulsing) -->
+<div class="flex md:flex-col items-center md:items-center gap-3 md:gap-2 z-10 w-full md:w-1/4">
+<div class="relative w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-md shrink-0 ring-4 ring-primary-fixed animate-pulse">
+<span class="material-symbols-outlined text-[24px]">storefront</span>
+</div>
+<div class="text-left md:text-center">
+<span class="font-label-md text-label-md text-primary font-bold">2. Accepted by Shop</span>
+<div class="font-body-sm text-body-sm text-on-surface font-medium flex items-center md:justify-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span class="">In progress</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant hidden md:block">Confirmed by Hub Team</p>
+</div>
+</div>
+<!-- Step 3: Packed at Hub (Pending) -->
+<div class="flex md:flex-col items-center md:items-center gap-3 md:gap-2 z-10 w-full md:w-1/4 opacity-60">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">inventory_2</span>
+</div>
+<div class="text-left md:text-center">
+<span class="font-label-md text-label-md text-on-surface font-medium">3. Packed at Hub</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Est. 10:35 AM</span>
+<p class="font-body-sm text-body-sm text-outline hidden md:block">Quality inspection</p>
+</div>
+</div>
+<!-- Step 4: Out for Delivery (Pending) -->
+<div class="flex md:flex-col items-center md:items-center gap-3 md:gap-2 z-10 w-full md:w-1/4 opacity-60">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">pedal_bike</span>
+</div>
+<div class="text-left md:text-center">
+<span class="font-label-md text-label-md text-on-surface font-medium">4. Out for Delivery</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Est. 10:55 AM</span>
+<p class="font-body-sm text-body-sm text-outline hidden md:block">Eco courier assigned</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ETA Banner & Hub Contact Split -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-xs">
+<!-- Estimated Arrival Card -->
+<div class="md:col-span-2 bg-surface-container-high rounded-xl p-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm shrink-0">
+<span class="material-symbols-outlined text-[26px]">electric_moped</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Fast Lane Local Dispatch</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">Estimated arrival today by 11:15 AM</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Approx. 45 mins total fulfillment window</div>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-2 bg-surface-container-lowest px-3 py-2 rounded-lg text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Cold-chain preserved</span>
+</div>
+</div>
+<!-- Direct Hub Support Card -->
+<div class="bg-surface-container-high rounded-xl p-space-md flex flex-col justify-between gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Need immediate changes?</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">Hub Direct</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Speak directly with Green Valley Organics packer</p>
+<a class="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-surface-container-lowest hover:bg-surface text-primary rounded-lg font-label-md text-label-md shadow-sm transition-colors" href="tel:5550192834">
+<span class="material-symbols-outlined text-[16px]">call</span>
+<span class="">Call Hub: (555) 019-2834</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Modal Mock for SMS Updates -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm hidden" id="sms-modal">
+<div class="bg-surface-container-lowest w-full max-w-md mx-4 rounded-xl p-space-lg shadow-xl space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">sms</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">SMS Live Tracking</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" id="close-sms-modal">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">We will send automated real-time dispatch pings and drop-off photos to:</p>
+<div class="p-3 bg-surface-container-low rounded-xl font-label-lg text-label-lg text-on-surface flex items-center justify-between">
+<span class="">+1 (555) 234-5678</span>
+<span class="text-primary font-label-sm text-label-sm">Primary Phone</span>
+</div>
+<div class="flex justify-end gap-2 pt-2">
+<button class="w-full py-2.5 bg-primary text-on-primary rounded-xl font-label-lg text-label-lg shadow-md hover:bg-primary-container transition-colors" id="confirm-sms-btn">
+            Activate Free SMS Alerts
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Vanilla Micro-Interactions -->
+<script>
+    let activeOrderId = null;
+    let pollInterval = null;
+    let checkoutIdempotencyKey = api.generateUUID();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCheckoutCart();
+
+      // Check if URL has orderId to track directly (e.g. checkout.html?orderId=1)
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlOrderId = urlParams.get('orderId');
+      if (urlOrderId) {
+        trackExistingOrder(urlOrderId);
+      }
+    });
+
+    function renderCheckoutCart() {
+      const cart = api.getCart();
+      const count = api.getCartCount();
+      const subtotal = api.getCartSubtotal();
+      const tax = subtotal * 0.05;
+      const delivery = count > 0 ? 2.50 : 0.00;
+      const total = subtotal + tax + delivery;
+
+      const header = document.getElementById('checkoutGoodsCountHeader');
+      if (header) header.textContent = `Cart Goods (${count} items)`;
+
+      const list = document.getElementById('checkoutGoodsList');
+      if (list) {
+        if (count === 0 && !activeOrderId) {
+          list.innerHTML = `
+            <div class="p-6 text-center text-slate-400 bg-surface-container-low rounded-xl">
+              <p class="font-bold text-on-surface">Your cart is empty.</p>
+              <a href="index.html" class="mt-2 inline-block text-xs text-primary font-bold hover:underline">Browse Marketplace →</a>
+            </div>
+          `;
+        } else {
+          list.innerHTML = cart.items.map(item => `
+            <div class="flex items-center gap-space-sm p-space-xs rounded-lg hover:bg-surface-container-low/50 transition-colors border border-surface-container-low">
+              <div class="w-14 h-14 rounded-lg overflow-hidden bg-surface-container shrink-0">
+                <img class="w-full h-full object-cover" src="${item.imageUrl}" alt="${item.name}">
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="font-label-md text-label-md text-on-surface font-semibold truncate">${item.name}</h4>
+                <div class="flex items-center gap-2 mt-0.5">
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Qty: ${item.quantity}</span>
+                  <span class="text-outline-variant">•</span>
+                  <span class="font-label-sm text-label-sm text-primary font-medium">$${item.price.toFixed(2)} ea</span>
+                </div>
+              </div>
+              <div class="text-right shrink-0">
+                <span class="font-label-lg text-label-lg text-on-surface font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+
+      document.getElementById('checkoutSubtotal').textContent = api.formatCurrency(subtotal);
+      document.getElementById('checkoutTax').textContent = api.formatCurrency(tax);
+      document.getElementById('checkoutTotal').textContent = api.formatCurrency(total);
+      const btnLabel = document.getElementById('checkoutBtnLabel');
+      if (btnLabel) btnLabel.textContent = `Place Order (${api.formatCurrency(total)})`;
+    }
+
+    async function handlePlaceOrder() {
+      const cart = api.getCart();
+      if (!cart || cart.items.length === 0) {
+        api.showToast('Your cart is empty. Please add items before placing order.', 'warning');
+        return;
+      }
+
+      // Check login
+      if (!api.isLoggedIn()) {
+        api.showToast('Signing in as demo customer to place order...', 'info');
+        try {
+          await api.login('customer@localshops.com', 'Password@123');
+        } catch (e) {
+          window.location.href = 'auth.html?redirect=checkout.html';
+          return;
+        }
+      }
+
+      const placeBtn = document.getElementById('place-order-button');
+      if (placeBtn) {
+        placeBtn.disabled = true;
+        placeBtn.classList.add('opacity-75');
+      }
+
+      const orderPayload = {
+        shopId: cart.shopId,
+        deliveryAddress: '742 Evergreen Terrace, Springfield (Whitefield, Bangalore)',
+        items: cart.items.map(i => ({
+          productId: i.productId,
+          quantity: i.quantity
+        }))
+      };
+
+      try {
+        api.showToast('Placing order with atomic stock lock & idempotency key...', 'info');
+        const order = await api.createOrder(orderPayload, checkoutIdempotencyKey);
+        
+        api.showToast(`Order #LS-${order.id} placed successfully!`, 'success');
+        activeOrderId = order.id;
+
+        // Clear cart now that order is confirmed
+        api.clearCart();
+        renderCheckoutCart();
+
+        // Reveal & update status card
+        renderOrderStatusCard(order);
+        startStatusPolling(order.id);
+
+      } catch (err) {
+        api.showToast(err.message || 'Failed to place order. Please retry.', 'error');
+      } finally {
+        if (placeBtn) {
+          placeBtn.disabled = false;
+          placeBtn.classList.remove('opacity-75');
+        }
+      }
+    }
+
+    function renderOrderStatusCard(order) {
+      const card = document.getElementById('order-status-card');
+      card.classList.remove('hidden');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Update Order ID & message
+      const idTitle = card.querySelector('.font-headline-sm');
+      if (idTitle) idTitle.textContent = `Order #LS-${order.id} Placed Successfully!`;
+
+      // Update delivery address in card
+      const addrEl = card.querySelector('.font-body-md');
+      if (addrEl && order.shopName) {
+        addrEl.textContent = `${order.shopName} is preparing your basket for direct dispatch.`;
+      }
+
+      // Update Steps: PLACED, ACCEPTED, PACKED, DELIVERED
+      updateStepTracker(order.status);
+
+      // Cancel button handler
+      const cancelBtn = document.getElementById('cancel-order-btn');
+      if (cancelBtn) {
+        if (order.status === 'DELIVERED' || order.status === 'CANCELLED') {
+          cancelBtn.classList.add('hidden');
+        } else {
+          cancelBtn.classList.remove('hidden');
+          cancelBtn.onclick = async () => {
+            if (confirm(`Are you sure you want to cancel Order #LS-${order.id}?`)) {
+              try {
+                await api.cancelOrder(order.id);
+                api.showToast('Order cancelled successfully.', 'info');
+                trackExistingOrder(order.id);
+              } catch (e) {
+                api.showToast(e.message || 'Could not cancel order.', 'error');
+              }
+            }
+          };
+        }
+      }
+    }
+
+    function updateStepTracker(status) {
+      // Status badge pill
+      const badgePill = document.querySelector('#order-status-card span.bg-primary-fixed');
+      if (badgePill) {
+        badgePill.textContent = `Status: ${status}`;
+        if (status === 'CANCELLED') {
+          badgePill.className = 'px-2.5 py-0.5 rounded-full bg-red-100 text-red-800 font-label-sm text-label-sm font-bold';
+        } else if (status === 'DELIVERED') {
+          badgePill.className = 'px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-bold';
+        }
+      }
+    }
+
+    function startStatusPolling(orderId) {
+      if (pollInterval) clearInterval(pollInterval);
+      pollInterval = setInterval(async () => {
+        try {
+          const order = await api.getOrder(orderId);
+          updateStepTracker(order.status);
+          if (order.status === 'DELIVERED' || order.status === 'CANCELLED') {
+            clearInterval(pollInterval);
+          }
+        } catch (e) {
+          console.warn('Status poll error:', e);
+        }
+      }, 3000);
+    }
+
+    async function trackExistingOrder(orderId) {
+      try {
+        const order = await api.getOrder(orderId);
+        activeOrderId = order.id;
+        renderOrderStatusCard(order);
+        startStatusPolling(order.id);
+      } catch (e) {
+        api.showToast('Order not found or access denied.', 'error');
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl pt-space-xl pb-space-lg"><div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin"><div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-space-xl"><div class="space-y-space-sm"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-primary text-[24px]">storefront</span><span class="font-headline-sm text-headline-sm text-primary">LocalHarvest</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Connecting neighborhood artisans and sustainable organic farms directly with mindful consumers.</p></div><div><h4 class="font-label-lg text-label-lg text-on-surface mb-space-sm">Marketplace</h4><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li class=""><a class="hover:text-on-surface transition-colors" href="#">Browse All Shops</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Seasonal Harvest Box</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Artisan Partners</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Pickup Hubs</a></li></ul></div><div><h4 class="font-label-lg text-label-lg text-on-surface mb-space-sm">Community</h4><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li class=""><a class="hover:text-on-surface transition-colors" href="#">Become a Vendor</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Local Food Standards</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Neighborhood Events</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Impact Report</a></li></ul></div><div><h4 class="font-label-lg text-label-lg text-on-surface mb-space-sm">Customer Support</h4><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li class=""><a class="hover:text-on-surface transition-colors" href="#">Order Tracking</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Delivery &amp; Pickup</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Help Center</a></li><li class=""><a class="hover:text-on-surface transition-colors" href="#">Contact Storefront</a></li></ul></div></div><div class="flex flex-col sm:flex-row items-center justify-between pt-space-md text-on-surface-variant font-body-sm text-body-sm"><p class="">© 2025 LocalHarvest Marketplace. Dedicated to fresh community commerce.</p><div class="flex gap-space-md mt-space-sm sm:mt-0"><a class="hover:text-on-surface" href="#">Privacy</a><a class="hover:text-on-surface" href="#">Terms</a><a class="hover:text-on-surface" href="#">Accessibility</a></div></div></div></footer>
+
+</body></html>

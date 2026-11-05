@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-tertiary-fixed-variant":"#004b73","on-tertiary-container":"#fdfcff","inverse-on-surface":"#f9efe8","surface-container-low":"#fcf2eb","primary-fixed-dim":"#68dba9","secondary-fixed-dim":"#ffb77d","inverse-primary":"#68dba9","on-secondary-fixed":"#2f1500","error-container":"#ffdad6","on-secondary-container":"#663500","outline-variant":"#bccac0","on-primary":"#ffffff","tertiary":"#006194","on-surface":"#1f1b17","surface-dim":"#e2d8d2","primary-container":"#00855d","on-primary-fixed-variant":"#005137","outline":"#6d7a72","surface-container-high":"#f0e6e0","surface-variant":"#eae1da","tertiary-fixed":"#cce5ff","on-error":"#ffffff","surface-container-highest":"#eae1da","on-surface-variant":"#3d4a42","tertiary-container":"#007bb9","on-tertiary":"#ffffff","on-primary-fixed":"#002114","secondary":"#904d00","tertiary-fixed-dim":"#93ccff","surface-bright":"#fff8f5","secondary-container":"#fe932c","background":"#fff8f5","on-primary-container":"#f5fff7","on-error-container":"#93000a","error":"#ba1a1a","on-secondary-fixed-variant":"#6e3900","primary":"#006948","surface-tint":"#006c4a","surface-container":"#f6ece6","inverse-surface":"#342f2b","secondary-fixed":"#ffdcc3","on-background":"#1f1b17","on-tertiary-fixed":"#001d31","surface":"#fff8f5","primary-fixed":"#85f8c4","on-secondary":"#ffffff","surface-container-lowest":"#ffffff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xl":"2.5rem","space-lg":"1.5rem","margin-mobile":"1rem","margin":"2rem","space-md":"1rem","space-xs":"0.25rem","gutter-mobile":"1rem","gutter":"1.5rem","space-sm":"0.5rem"},fontFamily:{"headline-md":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"body-lg":["Inter"],"body-md":["Inter"],"label-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-sm":["Inter"]},fontSize:{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"display-hero":["48px",{"lineHeight":"56px","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"600"}],"display-hero-mobile":["32px",{"lineHeight":"40px","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}]}}}};</script><script src="api.js"></script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-inverse-surface text-inverse-on-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">storefront</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-white">LocalShops</span><span class="font-label-sm text-label-sm text-outline-variant">Merchant Portal</span></div></div></div><div class="px-space-md py-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-highest/10 flex items-center justify-between"><div class="flex items-center gap-space-sm overflow-hidden"><div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">eco</span></div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-white truncate">Green Valley Organics</span><div class="flex items-center gap-space-xs"><span class="inline-block w-1.5 h-1.5 rounded-full bg-primary-fixed"></span><span class="font-label-sm text-label-sm text-primary-fixed font-medium">Approved</span></div></div></div><button class="text-outline-variant hover:text-white transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">unfold_more</span></button></div></div><div class="px-space-md py-space-sm"><span class="px-space-sm font-label-sm text-label-sm uppercase tracking-wider text-outline-variant">Store Navigation</span></div><nav class="flex flex-col gap-space-xs px-space-md" data-active-classes="bg-primary text-on-primary font-label-lg rounded-lg"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2.5 transition-all bg-primary text-on-primary font-label-lg rounded-lg" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-lg text-label-lg">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-inverse-on-surface/80 hover:bg-surface-container-highest/15 hover:text-white transition-all" data-path="inventory" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="font-label-lg text-label-lg">Inventory</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-inverse-on-surface/80 hover:bg-surface-container-highest/15 hover:text-white transition-all" data-path="orders" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-label-lg text-label-lg">Orders</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-inverse-on-surface/80 hover:bg-surface-container-highest/15 hover:text-white transition-all" data-path="analytics" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span class="font-label-lg text-label-lg">Analytics</span></a><a class="flex items-center gap-space-sm px-space-sm py-2.5 rounded-lg text-inverse-on-surface/80 hover:bg-surface-container-highest/15 hover:text-white transition-all" data-path="shop-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Shop Settings</span></a></nav></div><div class="p-space-md bg-surface-container-highest/5 m-space-md rounded-xl"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-label-md text-label-md text-white font-medium">Marcus Vance</span><span class="font-label-sm text-label-sm text-outline-variant">Owner • Pro Tier</span></div></div><a class="text-outline-variant hover:text-white transition-colors" data-path="shop-settings" href="#"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md w-96"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full h-10 pl-10 pr-space-md rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="Search orders, SKU, customer..." type="text"/></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">help_outline</span></button><button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface relative transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-secondary-container"></span></button></div><div class="h-6 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-md text-label-md text-on-surface">Marcus Vance</span><span class="font-label-sm text-label-sm text-on-surface-variant">Green Valley Organics</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full min-h-screen bg-surface"><div class="flex flex-col w-full">
+<div class="px-space-lg py-space-md space-y-space-lg max-w-[1560px] mx-auto w-full">
+<div class="flex flex-col gap-space-sm">
+<nav class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span>Shop Portal</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Green Valley Organics</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Management Overview</span>
+</nav>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[26px]">eco</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm flex-wrap">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Green Valley Organics</h1>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                APPROVED
+              </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">near_me</span>
+                Hub Proximity: 1.2 miles
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+              Fresh farm produce, artisan dairy &amp; small-batch artisanal pantry staples • Dispatch Hub #4
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full lg:w-auto justify-end flex-wrap">
+<a class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span>View Public Storefront</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+            Export Report
+          </button>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-all shadow-sm" onclick="document.getElementById('inventory-section').scrollIntoView({behavior: 'smooth'})" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            + Add New Product
+          </button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Revenue</span>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">$1,248.50</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">payments</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between pt-2">
+<span class="inline-flex items-center gap-0.5 text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+            +18.4%
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">vs last week</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Orders</span>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">6 pending</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed/50 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">receipt_long</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between pt-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+            3 urgent fulfillment
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Hub SLA: 45m</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Products</span>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">24 active</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">inventory_2</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between pt-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">
+            Dairy • Bakery • Pantry
+          </span>
+<span class="text-tertiary font-label-sm text-label-sm font-semibold">100% in catalog</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Low Stock Alerts</span>
+<div class="font-headline-md text-headline-md text-error mt-1">2 items</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between pt-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+            Stock &lt; 5 units
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Restock recommended</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between flex-wrap gap-space-sm bg-surface-container-low p-1.5 rounded-xl shadow-inner">
+<div class="flex items-center gap-1">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg font-label-md text-label-md transition-all bg-surface-container-lowest text-primary shadow-sm" id="tab-btn-inventory" onclick="switchMainTab('inventory')" type="button">
+<span class="material-symbols-outlined text-[18px]">table_view</span>
+<span>Inventory Management</span>
+<span class="px-2 py-0.2 bg-primary/10 text-primary rounded-full text-xs font-semibold">24 items</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" id="tab-btn-kanban" onclick="switchMainTab('kanban')" type="button">
+<span class="material-symbols-outlined text-[18px]">view_kanban</span>
+<span>Order Pipeline Kanban</span>
+<span class="px-2 py-0.2 bg-surface-container-highest text-on-surface-variant rounded-full text-xs font-semibold">6 active</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" id="tab-btn-analytics" onclick="switchMainTab('analytics')" type="button">
+<span class="material-symbols-outlined text-[18px]">monitoring</span>
+<span>Store Analytics &amp; Insights</span>
+</button>
+</div>
+<div class="flex items-center gap-2 px-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="inline-block w-2 h-2 rounded-full bg-primary-fixed animate-ping"></span>
+<span>Auto-sync with Central Dispatch</span>
+</div>
+</div>
+<section class="space-y-space-md" id="inventory-section">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-sm">
+<div class="relative flex-1 max-w-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full h-10 pl-10 pr-space-md rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="inventory-search" onkeyup="filterInventoryTable()" placeholder="Search product name, SKU, or tag..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<select class="h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none" id="filter-category" onchange="filterInventoryTable()">
+<option value="all">All Categories</option>
+<option value="Dairy &amp; Farm">Dairy &amp; Farm</option>
+<option value="Artisan Bakery">Artisan Bakery</option>
+<option value="Pantry &amp; Preserves">Pantry &amp; Preserves</option>
+<option value="Fresh Produce">Fresh Produce</option>
+</select>
+<select class="h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none" id="filter-stock" onchange="filterInventoryTable()">
+<option value="all">All Stock Levels</option>
+<option value="low">Low Stock Alert (&lt;5)</option>
+<option value="in_stock">In Stock (&gt;=5)</option>
+</select>
+<select class="h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none" id="filter-status" onchange="filterInventoryTable()">
+<option value="all">Status: All</option>
+<option value="active">Active Only</option>
+<option value="inactive">Inactive Only</option>
+</select>
+<button class="h-10 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md inline-flex items-center gap-1 shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>New SKU</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto rounded-lg">
+<table class="w-full text-left font-body-md text-body-md" id="inventory-table">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<th class="py-3 px-4 rounded-l-lg">Product Details</th>
+<th class="py-3 px-4">SKU Code</th>
+<th class="py-3 px-4">Category</th>
+<th class="py-3 px-4">Price</th>
+<th class="py-3 px-4">Stock Count</th>
+<th class="py-3 px-4 text-center">Active Status</th>
+<th class="py-3 px-4 rounded-r-lg text-right">Actions</th>
+</tr>
+</thead>
+<tbody id="inventoryTbody"><!-- Dynamically populated --></tbody>
+</table>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<div>Showing <span class="font-semibold text-on-surface">5</span> of <span class="font-semibold text-on-surface">24</span> active farm products</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-primary text-on-primary font-semibold text-xs" type="button">1</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container hover:bg-surface-container-high text-on-surface text-xs" type="button">2</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container hover:bg-surface-container-high text-on-surface text-xs" type="button">3</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="space-y-space-md pt-space-xs" id="kanban-section">
+<div class="flex items-center justify-between flex-wrap gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Live Order Dispatch &amp; Pipeline</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+            Hub Active • Real-time sync
+          </span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span>Target Prep Time: ≤ 15 mins</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md items-start">
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs py-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Placed (New)</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm font-bold">2</span>
+</div>
+<div class="space-y-space-sm" id="col-placed" class="flex flex-col gap-3 min-h-[300px]">
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs py-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Accepted</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold">2</span>
+</div>
+<div class="space-y-space-sm" id="col-accepted" class="flex flex-col gap-3 min-h-[300px]">
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs py-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Packed</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold">1</span>
+</div>
+<div class="space-y-space-sm" id="col-packed" class="flex flex-col gap-3 min-h-[300px]">
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs py-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Delivered</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-bold">1</span>
+</div>
+<div class="space-y-space-sm" id="col-delivered" class="flex flex-col gap-3 min-h-[300px]">
+              </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">store</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Need assistance with catalog exports or central hub delivery schedules?</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Marketplace vendor concierge is available 7:00 AM - 9:00 PM daily for Green Valley Organics.</p>
+</div>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<button class="px-4 py-2 rounded-lg bg-surface-container-highest hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" type="button">
+          Hub Guidelines
+        </button>
+<button class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors" type="button">
+          Contact Dispatcher
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let currentShopId = 4;
+  let allShopProducts = [];
+  let allShopOrders = [];
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    await verifyAuthAndInit();
+  });
+
+  async function verifyAuthAndInit() {
+    // If not logged in, auto-login as demo owner
+    if (!api.isLoggedIn()) {
+      try {
+        await api.login('owner@localshops.com', 'Password@123');
+        api.showToast('Logged in as Green Valley Organics owner', 'info');
+      } catch (e) {
+        window.location.href = 'auth.html';
+        return;
+      }
+    }
+
+    const user = api.getUser();
+    if (user && user.role !== 'SHOP_OWNER' && user.role !== 'ADMIN') {
+      api.showToast('Access restricted to verified shop owners.', 'warning');
+      setTimeout(() => window.location.href = 'index.html', 1500);
+      return;
+    }
+
+    await refreshDashboard();
+    // Poll orders every 4 seconds to catch new customer orders live!
+    setInterval(loadShopOrders, 4000);
+  }
+
+  async function refreshDashboard() {
+    await Promise.all([
+      loadShopProducts(),
+      loadShopOrders()
+    ]);
+  }
+
+  async function loadShopProducts() {
+    try {
+      const res = await api.getProducts({ shopId: currentShopId, size: 50 });
+      allShopProducts = res.content || [];
+      renderInventoryTable(allShopProducts);
+      updateProductKpis();
+    } catch (e) {
+      console.error('Failed to load shop products:', e);
+    }
+  }
+
+  async function loadShopOrders() {
+    try {
+      const orders = await api.getShopOrders(currentShopId);
+      allShopOrders = orders || [];
+      renderKanbanBoard(allShopOrders);
+      updateOrderKpis();
+    } catch (e) {
+      console.error('Failed to load shop orders:', e);
+    }
+  }
+
+  function renderInventoryTable(products) {
+    const tbody = document.getElementById('inventoryTbody');
+    if (!tbody) return;
+
+    if (products.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-400">No products found in your inventory. Click "Add New Product" to create one.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = products.map(p => {
+      const isLow = p.stock < 5;
+      const stockColor = p.stock === 0 ? 'bg-red-100 text-red-800' : (isLow ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800');
+      const img = p.imageUrl || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60';
+
+      return `
+        <tr class="border-b border-surface-container hover:bg-surface-container-low/40 transition-colors" data-category="${p.category}" data-stock="${p.stock}">
+          <td class="py-3.5 px-4">
+            <div class="flex items-center gap-3">
+              <img src="${img}" alt="${p.name}" class="w-10 h-10 object-cover rounded-lg border border-surface-container"/>
+              <div>
+                <p class="font-label-md text-label-md font-bold text-on-surface">${p.name}</p>
+                <p class="text-xs text-slate-400 uppercase">${p.category || 'General'}</p>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-4 font-mono text-xs text-slate-500 font-semibold">SKU-${p.id.toString().padStart(4, '0')}</td>
+          <td class="py-3.5 px-4 font-bold text-on-surface font-headline">$${Number(p.price).toFixed(2)}</td>
+          <td class="py-3.5 px-4">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${stockColor}">${p.stock} units</span>
+              <button onclick="handleQuickStockAdjust(${p.id}, ${p.stock - 1})" class="w-6 h-6 rounded bg-surface-container hover:bg-surface-container-high text-xs font-bold text-slate-600">-</button>
+              <button onclick="handleQuickStockAdjust(${p.id}, ${p.stock + 1})" class="w-6 h-6 rounded bg-surface-container hover:bg-surface-container-high text-xs font-bold text-slate-600">+</button>
+            </div>
+          </td>
+          <td class="py-3.5 px-4">
+            <span class="inline-flex items-center gap-1.5 text-xs font-semibold ${p.stock > 0 ? 'text-emerald-700' : 'text-slate-400'}">
+              <span class="w-2 h-2 rounded-full ${p.stock > 0 ? 'bg-emerald-500' : 'bg-slate-300'}"></span>
+              ${p.stock > 0 ? 'Active' : 'Sold Out'}
+            </span>
+          </td>
+          <td class="py-3.5 px-4 text-right">
+            <button onclick="handleDeleteProduct(${p.id}, '${p.name}')" class="text-slate-400 hover:text-red-600 p-1 transition-colors" title="Delete Product">
+              <span class="material-symbols-outlined text-[18px]">delete</span>
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function renderKanbanBoard(orders) {
+    const cols = {
+      'col-placed': document.getElementById('col-placed'),
+      'col-accepted': document.getElementById('col-accepted'),
+      'col-packed': document.getElementById('col-packed'),
+      'col-delivered': document.getElementById('col-delivered')
+    };
+
+    Object.values(cols).forEach(col => { if (col) col.innerHTML = ''; });
+
+    orders.forEach(order => {
+      const card = document.createElement('div');
+      card.className = 'bg-surface-container-lowest p-3.5 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2.5 border border-surface-container';
+
+      const itemCount = (order.items || []).reduce((s, i) => s + i.quantity, 0);
+      const itemsSummary = (order.items || []).map(i => `${i.productName} x${i.quantity}`).join(', ') || 'Grocery items';
+
+      let actionHtml = '';
+      if (order.status === 'PLACED') {
+        actionHtml = `
+          <button onclick="advanceOrderStatus(${order.id}, 'ACCEPTED')" class="w-full h-9 rounded-lg bg-primary hover:bg-primary-container text-white text-xs font-bold flex items-center justify-center gap-1 shadow-xs transition-colors">
+            <span>Accept Order</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </button>
+        `;
+      } else if (order.status === 'ACCEPTED') {
+        actionHtml = `
+          <button onclick="advanceOrderStatus(${order.id}, 'PACKED')" class="w-full h-9 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1 shadow-xs transition-colors">
+            <span>Mark as Packed</span>
+            <span class="material-symbols-outlined text-[16px]">inventory</span>
+          </button>
+        `;
+      } else if (order.status === 'PACKED') {
+        actionHtml = `
+          <button onclick="advanceOrderStatus(${order.id}, 'DELIVERED')" class="w-full h-9 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1 shadow-xs transition-colors">
+            <span>Mark Delivered</span>
+            <span class="material-symbols-outlined text-[16px]">check_circle</span>
+          </button>
+        `;
+      } else if (order.status === 'DELIVERED') {
+        actionHtml = `
+          <div class="w-full py-1.5 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-bold text-center border border-emerald-200">
+            Completed • Delivered
+          </div>
+        `;
+      } else if (order.status === 'CANCELLED') {
+        actionHtml = `
+          <div class="w-full py-1.5 rounded-lg bg-red-50 text-red-800 text-xs font-bold text-center border border-red-200">
+            Cancelled
+          </div>
+        `;
+      }
+
+      card.innerHTML = `
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="font-mono text-primary font-bold text-xs">#LS-${order.id}</span>
+            <div class="font-bold text-xs text-on-surface mt-0.5">${order.customerName || 'Customer'}</div>
+          </div>
+          <span class="text-[11px] text-slate-400">${order.createdAt ? new Date(order.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Today'}</span>
+        </div>
+        <div class="text-xs text-slate-600 line-clamp-2">
+          ${itemCount} items • ${itemsSummary}
+        </div>
+        <div class="flex items-center justify-between pt-1 border-t border-surface-container">
+          <span class="font-bold text-on-surface text-sm">$${Number(order.totalAmount || 0).toFixed(2)}</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container text-slate-500 text-[10px] font-bold">Cash on Delivery</span>
+        </div>
+        ${actionHtml}
+      `;
+
+      if (order.status === 'PLACED' && cols['col-placed']) cols['col-placed'].appendChild(card);
+      else if (order.status === 'ACCEPTED' && cols['col-accepted']) cols['col-accepted'].appendChild(card);
+      else if (order.status === 'PACKED' && cols['col-packed']) cols['col-packed'].appendChild(card);
+      else if (order.status === 'DELIVERED' && cols['col-delivered']) cols['col-delivered'].appendChild(card);
+    });
+
+    // Show empty placeholder in columns with 0 items
+    Object.entries(cols).forEach(([id, col]) => {
+      if (col && col.children.length === 0) {
+        col.innerHTML = '<div class="py-8 text-center text-slate-400 text-xs border border-dashed border-outline-variant/60 rounded-xl">No orders in this phase</div>';
+      }
+    });
+  }
+
+  async function advanceOrderStatus(orderId, nextStatus) {
+    try {
+      api.showToast(`Transitioning order #LS-${orderId} to ${nextStatus}...`, 'info');
+      await api.updateOrderStatus(orderId, nextStatus);
+      api.showToast(`Order #LS-${orderId} is now ${nextStatus}!`, 'success');
+      await loadShopOrders();
+    } catch (e) {
+      api.showToast(e.message || 'Failed to update order status.', 'error');
+    }
+  }
+
+  async function handleQuickStockAdjust(productId, newStock) {
+    if (newStock < 0) return;
+    const prod = allShopProducts.find(p => p.id === productId);
+    if (!prod) return;
+
+    try {
+      await api.updateProduct(productId, {
+        name: prod.name,
+        category: prod.category,
+        price: prod.price,
+        stock: newStock,
+        description: prod.description,
+        imageUrl: prod.imageUrl
+      });
+      api.showToast(`Stock updated to ${newStock} for ${prod.name}`);
+      await loadShopProducts();
+    } catch (e) {
+      api.showToast(e.message || 'Failed to adjust stock.', 'error');
+    }
+  }
+
+  async function handleDeleteProduct(productId, name) {
+    if (confirm(`Are you sure you want to delete ${name}?`)) {
+      try {
+        await api.deleteProduct(productId);
+        api.showToast(`Deleted ${name}`, 'info');
+        await loadShopProducts();
+      } catch (e) {
+        api.showToast(e.message || 'Failed to delete product.', 'error');
+      }
+    }
+  }
+
+  function openAddProductModal() {
+    document.getElementById('addProductForm').reset();
+    document.getElementById('addProductDialog').showModal();
+  }
+
+  async function handleAddProduct() {
+    const name = document.getElementById('newProdName').value.trim();
+    const category = document.getElementById('newProdCategory').value;
+    const price = parseFloat(document.getElementById('newProdPrice').value);
+    const stock = parseInt(document.getElementById('newProdStock').value, 10);
+    const imageUrl = document.getElementById('newProdImage').value.trim() || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60';
+    const description = document.getElementById('newProdDesc').value.trim();
+
+    const submitBtn = document.getElementById('btnSubmitAddProd');
+    submitBtn.disabled = true;
+
+    try {
+      await api.createProduct({
+        name,
+        category,
+        price,
+        stock,
+        imageUrl,
+        description
+      });
+      api.showToast(`Created ${name}!`, 'success');
+      document.getElementById('addProductDialog').close();
+      await loadShopProducts();
+    } catch (e) {
+      api.showToast(e.message || 'Failed to create product.', 'error');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  }
+
+  function updateProductKpis() {
+    // Total Products
+    const prodKpi = document.querySelector('.bg-surface-container-lowest:nth-child(3) .font-headline-lg') || document.querySelector('.font-headline-lg');
+    const lowStock = allShopProducts.filter(p => p.stock < 5).length;
+  }
+
+  function updateOrderKpis() {
+    const active = allShopOrders.filter(o => o.status !== 'DELIVERED' && o.status !== 'CANCELLED').length;
+    const revenue = allShopOrders
+      .filter(o => o.status !== 'CANCELLED')
+      .reduce((sum, o) => sum + Number(o.totalAmount || 0), 0);
+  }
+
+  function switchMainTab(tab) {
+    const invSec = document.getElementById('inventory-section');
+    const kanSec = document.getElementById('kanban-section');
+    const btnInv = document.getElementById('tab-btn-inventory');
+    const btnKan = document.getElementById('tab-btn-kanban');
+
+    const defaultClass = "flex items-center gap-2 px-4 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all";
+    const activeClass = "flex items-center gap-2 px-4 py-2 rounded-lg font-label-md text-label-md transition-all bg-surface-container-lowest text-primary shadow-sm font-bold";
+
+    if (btnInv) btnInv.className = (tab === 'inventory' ? activeClass : defaultClass);
+    if (btnKan) btnKan.className = (tab === 'kanban' ? activeClass : defaultClass);
+
+    if (tab === 'inventory' && invSec) {
+      invSec.scrollIntoView({ behavior: 'smooth' });
+    } else if (tab === 'kanban' && kanSec) {
+      kanSec.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function filterInventoryTable() {
+    const searchVal = (document.getElementById('inventory-search')?.value || '').toLowerCase();
+    const catVal = document.getElementById('filter-category')?.value || 'all';
+    const stockVal = document.getElementById('filter-stock')?.value || 'all';
+    const rows = document.querySelectorAll('#inventoryTbody tr');
+
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      const cat = row.getAttribute('data-category');
+      const stock = parseInt(row.getAttribute('data-stock') || '0', 10);
+
+      let matchesSearch = text.includes(searchVal);
+      let matchesCat = (catVal === 'all' || cat === catVal);
+      let matchesStock = true;
+
+      if (stockVal === 'low') {
+        matchesStock = (stock < 5);
+      } else if (stockVal === 'in_stock') {
+        matchesStock = (stock >= 5);
+      }
+
+      if (matchesSearch && matchesCat && matchesStock) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+</script></main></div>
+<!-- Add Product Modal (Modern Web Guidance Native Dialog) -->
+<dialog id="addProductDialog" aria-labelledby="addProductTitle" class="rounded-3xl p-0 w-full max-w-lg bg-white shadow-2xl border border-surface-container">
+  <div class="p-6 sm:p-8">
+    <div class="flex items-center justify-between pb-4 border-b border-surface-container">
+      <h3 id="addProductTitle" class="font-headline font-bold text-lg text-on-surface">Add New Farm Product</h3>
+      <button onclick="document.getElementById('addProductDialog').close()" class="w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center text-slate-400 hover:text-on-surface">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    
+    <form id="addProductForm" onsubmit="event.preventDefault(); handleAddProduct();" class="space-y-4 mt-4">
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Product Title</label>
+        <input type="text" id="newProdName" required placeholder="e.g. Organic Honeycrisp Apples (1kg)" class="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant/60 text-sm focus:outline-none focus:border-primary"/>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Category</label>
+          <select id="newProdCategory" class="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant/60 text-sm focus:outline-none focus:border-primary bg-white">
+            <option value="Dairy">Dairy & Eggs</option>
+            <option value="Bakery">Artisan Bakery</option>
+            <option value="Fruits & Vegetables">Fresh Produce</option>
+            <option value="Pantry">Pantry & Preserves</option>
+            <option value="Groceries">Groceries</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Price ($)</label>
+          <input type="number" step="0.01" min="0.10" id="newProdPrice" required placeholder="4.99" class="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant/60 text-sm focus:outline-none focus:border-primary"/>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Initial Stock Count</label>
+          <input type="number" min="0" id="newProdStock" required placeholder="25" class="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant/60 text-sm focus:outline-none focus:border-primary"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Image URL</label>
+          <input type="url" id="newProdImage" placeholder="https://..." class="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant/60 text-sm focus:outline-none focus:border-primary"/>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">Description</label>
+        <textarea id="newProdDesc" rows="3" placeholder="Farm-fresh details, harvesting notes, dietary certifications..." class="w-full px-3.5 py-2 rounded-xl border border-outline-variant/60 text-sm focus:outline-none focus:border-primary"></textarea>
+      </div>
+
+      <div class="pt-4 flex justify-end gap-3 border-t border-surface-container">
+        <button type="button" onclick="document.getElementById('addProductDialog').close()" class="px-4 py-2.5 rounded-xl border border-outline-variant text-xs font-semibold text-slate-700 hover:bg-surface-container">Cancel</button>
+        <button type="submit" id="btnSubmitAddProd" class="px-5 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-md hover:bg-primary-container">Publish Product</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+</body></html>
