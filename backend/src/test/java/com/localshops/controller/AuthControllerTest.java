@@ -2,10 +2,13 @@ package com.localshops.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.localshops.config.SecurityConfig;
+import com.localshops.dto.AuthResponse;
+import com.localshops.dto.LoginRequest;
 import com.localshops.dto.SignupRequest;
 import com.localshops.dto.UserResponse;
 import com.localshops.exception.EmailAlreadyExistsException;
 import com.localshops.exception.GlobalExceptionHandler;
+import com.localshops.exception.InvalidCredentialsException;
 import com.localshops.model.Role;
 import com.localshops.service.AuthService;
 import org.junit.jupiter.api.DisplayName;
@@ -108,6 +111,72 @@ class AuthControllerTest {
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.status").value(409))
                 .andExpect(jsonPath("$.message").value("Email is already registered: ravi@example.com"));
+    }
+
+    @Test
+    @DisplayName("POST /api/auth/login - returns 200 OK with token on valid credentials")
+    void shouldReturn200OnValidLogin() throws Exception {
+        LoginRequest request = LoginRequest.builder()
+                .email("ravi@example.com")
+                .password("securePassword123")
+                .build();
+
+        AuthResponse authResponse = AuthResponse.builder()
+                .accessToken("mocked.jwt.token")
+                .tokenType("Bearer")
+                .user(UserResponse.builder()
+                        .id(1L)
+                        .name("Ravi Teja")
+                        .email("ravi@example.com")
+                        .role(Role.CUSTOMER)
+                        .build())
+                .build();
+
+        when(authService.login(any(LoginRequest.class))).thenReturn(authResponse);
+
+        mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accessToken").value("mocked.jwt.token"))
+                .andExpect(jsonPath("$.tokenType").value("Bearer"))
+                .andExpect(jsonPath("$.user.email").value("ravi@example.com"));
+    }
+
+    @Test
+    @DisplayName("POST /api/auth/login - returns 400 Bad Request on invalid input")
+    void shouldReturn400OnInvalidLoginInput() throws Exception {
+        LoginRequest request = LoginRequest.builder()
+                .email("not-an-email")
+                .password("")
+                .build();
+
+        mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.validationErrors.email").exists())
+                .andExpect(jsonPath("$.validationErrors.password").exists());
+    }
+
+    @Test
+    @DisplayName("POST /api/auth/login - returns 401 Unauthorized on invalid credentials")
+    void shouldReturn401OnInvalidCredentials() throws Exception {
+        LoginRequest request = LoginRequest.builder()
+                .email("ravi@example.com")
+                .password("wrongpassword")
+                .build();
+
+        when(authService.login(any(LoginRequest.class)))
+                .thenThrow(new InvalidCredentialsException("Invalid email or password"));
+
+        mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.status").value(401))
+                .andExpect(jsonPath("$.message").value("Invalid email or password"));
     }
 }
 

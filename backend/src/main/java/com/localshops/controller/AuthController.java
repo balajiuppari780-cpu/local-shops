@@ -1,5 +1,7 @@
 package com.localshops.controller;
 
+import com.localshops.dto.AuthResponse;
+import com.localshops.dto.LoginRequest;
 import com.localshops.dto.SignupRequest;
 import com.localshops.dto.UserResponse;
 import com.localshops.service.AuthService;
@@ -27,6 +29,13 @@ public class AuthController {
     @Operation(summary = "Register a new user", description = "Creates a customer or shop owner account")
     public UserResponse signup(@Valid @RequestBody SignupRequest request) {
         return authService.signup(request);
+    }
+
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Authenticate user", description = "Authenticates credentials and returns a JWT access token")
+    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 }
 

@@ -85,3 +85,4 @@ class JwtServiceTest {
         assertThat(jwtService.isTokenValid(tamperedToken, "valid@example.com")).isFalse();
     }
 }
+

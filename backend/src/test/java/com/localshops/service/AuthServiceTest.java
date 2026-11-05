@@ -1,12 +1,16 @@
 package com.localshops.service;
 
+import com.localshops.dto.AuthResponse;
+import com.localshops.dto.LoginRequest;
 import com.localshops.dto.SignupRequest;
 import com.localshops.dto.UserResponse;
 import com.localshops.exception.BadRequestException;
 import com.localshops.exception.EmailAlreadyExistsException;
+import com.localshops.exception.InvalidCredentialsException;
 import com.localshops.model.Role;
 import com.localshops.model.User;
 import com.localshops.repository.UserRepository;
+import com.localshops.security.JwtService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.Instant;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -32,6 +37,9 @@ class AuthServiceTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private JwtService jwtService;
 
     @InjectMocks
     private AuthService authService;
@@ -101,6 +109,73 @@ class AuthServiceTest {
         assertThatThrownBy(() -> authService.signup(request))
                 .isInstanceOf(BadRequestException.class)
                 .hasMessageContaining("ADMIN role cannot be assigned through public registration");
+    }
+
+    @Test
+    @DisplayName("Should successfully authenticate user and return JWT token on valid credentials")
+    void shouldLoginSuccessfully() {
+        LoginRequest request = LoginRequest.builder()
+                .email("kiran@example.com")
+                .password("secret123")
+                .build();
+
+        User user = User.builder()
+                .id(1L)
+                .name("Kiran Reddy")
+                .email("kiran@example.com")
+                .passwordHash("$2a$10$hashedPasswordSample")
+                .role(Role.CUSTOMER)
+                .createdAt(Instant.now())
+                .build();
+
+        when(userRepository.findByEmail("kiran@example.com")).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches("secret123", "$2a$10$hashedPasswordSample")).thenReturn(true);
+        when(jwtService.generateToken(user)).thenReturn("mocked.jwt.token");
+
+        AuthResponse response = authService.login(request);
+
+        assertThat(response).isNotNull();
+        assertThat(response.getAccessToken()).isEqualTo("mocked.jwt.token");
+        assertThat(response.getTokenType()).isEqualTo("Bearer");
+        assertThat(response.getUser().getEmail()).isEqualTo("kiran@example.com");
+    }
+
+    @Test
+    @DisplayName("Should throw InvalidCredentialsException when email not found")
+    void shouldThrowWhenEmailNotFound() {
+        LoginRequest request = LoginRequest.builder()
+                .email("unknown@example.com")
+                .password("secret123")
+                .build();
+
+        when(userRepository.findByEmail("unknown@example.com")).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> authService.login(request))
+                .isInstanceOf(InvalidCredentialsException.class)
+                .hasMessageContaining("Invalid email or password");
+    }
+
+    @Test
+    @DisplayName("Should throw InvalidCredentialsException when password does not match")
+    void shouldThrowWhenPasswordMismatched() {
+        LoginRequest request = LoginRequest.builder()
+                .email("kiran@example.com")
+                .password("wrongpassword")
+                .build();
+
+        User user = User.builder()
+                .id(1L)
+                .email("kiran@example.com")
+                .passwordHash("$2a$10$hashedPasswordSample")
+                .role(Role.CUSTOMER)
+                .build();
+
+        when(userRepository.findByEmail("kiran@example.com")).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches("wrongpassword", "$2a$10$hashedPasswordSample")).thenReturn(false);
+
+        assertThatThrownBy(() -> authService.login(request))
+                .isInstanceOf(InvalidCredentialsException.class)
+                .hasMessageContaining("Invalid email or password");
     }
 }
 

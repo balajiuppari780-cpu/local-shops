@@ -137,7 +137,7 @@ Tick the boxes as tasks finish. Always work on the **current phase** only.
 - [x] `User` entity, `Role` enum, `UserRepository`
 - [x] Signup endpoint with validation and BCrypt
 - [x] JWT utility (generate, validate) with secret from env var
-- [ ] Login endpoint returning JWT
+- [x] Login endpoint returning JWT
 - [ ] JWT authentication filter and Spring Security config (stateless)
 - [ ] Role-based access on endpoints (`@PreAuthorize` or config)
 - [x] Global exception handler with consistent error format
