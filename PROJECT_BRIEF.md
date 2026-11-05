@@ -125,7 +125,7 @@ Tick the boxes as tasks finish. Always work on the **current phase** only.
 ### Phase 1: Setup (Week 1)
 - [x] Generate Spring Boot project in `/backend` (Web, Data JPA, PostgreSQL Driver, Security, Validation, Lombok)
 - [x] Add springdoc-openapi dependency
-- [x] `application.yml`: PostgreSQL datasource (`jdbc:postgresql://localhost:5432/localshops`, user/password from env vars with defaults `shops`/`shops`), `ddl-auto: update`, `open-in-view: false`, SQL logging on for development
+- [x] `application.properties`: PostgreSQL datasource (`jdbc:postgresql://localhost:5432/localshops`, user/password from env vars with defaults `shops`/`shops`), `ddl-auto: update`, `open-in-view: false`, SQL logging on for development
 - [x] `.gitignore` (Java, Maven, IDE, Node, `.env`)
 - [x] Create `README.md` stub and `docs/` folder
 - [ ] App starts and connects to the database (pending manual DB user creation)
@@ -220,7 +220,7 @@ Start with **Phase 1 only**:
 
 1. Create the repo structure from section 2.
 2. Generate the Spring Boot backend with the Phase 1 dependencies.
-3. Configure `application.yml` and `.gitignore`.
+3. Configure `application.properties` and `.gitignore`.
 4. Run the app and confirm it connects to my local PostgreSQL. If the connection fails, tell me what to fix instead of changing the design.
 5. Make the first commit.
 6. Summarize what you created, tick the Phase 1 boxes in this file, and **stop and wait**.
