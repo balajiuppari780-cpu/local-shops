@@ -149,7 +149,7 @@ const api = {
         if (filters.minPrice) params.append('minPrice', filters.minPrice);
         if (filters.maxPrice) params.append('maxPrice', filters.maxPrice);
         if (filters.inStock !== undefined && filters.inStock !== null) params.append('inStock', filters.inStock);
-        if (filters.search) params.append('search', filters.search);
+        if (filters.search) params.append('q', filters.search);
         if (filters.page !== undefined) params.append('page', filters.page);
         params.append('size', filters.size || 24);
         if (filters.sort) params.append('sort', filters.sort);

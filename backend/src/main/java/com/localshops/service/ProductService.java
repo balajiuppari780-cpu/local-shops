@@ -113,6 +113,7 @@ public class ProductService {
             Long shopId,
             BigDecimal minPrice,
             BigDecimal maxPrice,
+            Boolean inStock,
             Pageable pageable
     ) {
         Specification<Product> spec = (root, query, cb) -> {
@@ -144,6 +145,14 @@ public class ProductService {
 
             if (maxPrice != null) {
                 predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+            }
+
+            if (inStock != null) {
+                if (inStock) {
+                    predicates.add(cb.greaterThan(root.get("stock"), 0));
+                } else {
+                    predicates.add(cb.lessThanOrEqualTo(root.get("stock"), 0));
+                }
             }
 
             // Only show products from APPROVED shops

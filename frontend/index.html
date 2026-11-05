@@ -137,14 +137,18 @@
         <button onclick="handleCategoryFilter('Groceries')" class="category-btn px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors">Groceries</button>
       </div>
 
-      <!-- Controls: In Stock & Sort -->
-      <div class="flex items-center gap-4 shrink-0 self-end md:self-auto">
-        <label class="flex items-center gap-2 text-xs font-semibold text-on-surface cursor-pointer select-none">
-          <input type="checkbox" id="inStockToggle" onchange="handleInStockToggle(this.checked)" class="rounded text-primary focus:ring-primary w-4 h-4"/>
-          <span>In Stock Only</span>
-        </label>
+      <!-- Controls: Availability & Sort -->
+      <div class="flex items-center gap-3 shrink-0 self-end md:self-auto">
+        <div class="flex items-center gap-1.5 bg-surface-container-low border border-outline-variant/60 rounded-lg px-2.5 py-1.5">
+          <span class="material-symbols-outlined text-[16px] text-primary">inventory_2</span>
+          <select id="stockFilterSelect" onchange="handleStockFilterChange(this.value)" class="text-xs font-semibold bg-transparent focus:outline-none cursor-pointer text-on-surface">
+            <option value="all">All Availability</option>
+            <option value="in_stock">In Stock Only</option>
+            <option value="out_of_stock">Out of Stock Only</option>
+          </select>
+        </div>
 
-        <select id="sortSelect" onchange="handleSortChange(this.value)" class="text-xs font-semibold bg-surface-container-low border border-outline-variant/60 rounded-lg px-2.5 py-1.5 focus:outline-none">
+        <select id="sortSelect" onchange="handleSortChange(this.value)" class="text-xs font-semibold bg-surface-container-low border border-outline-variant/60 rounded-lg px-2.5 py-1.5 focus:outline-none cursor-pointer">
           <option value="createdAt,desc">Newest First</option>
           <option value="price,asc">Price: Low to High</option>
           <option value="price,desc">Price: High to Low</option>
@@ -723,9 +727,19 @@
       fetchAndRenderProducts();
     }
 
-    function handleInStockToggle(checked) {
-      currentFilters.inStock = checked ? true : null;
+    function handleStockFilterChange(val) {
+      if (val === 'in_stock') {
+        currentFilters.inStock = true;
+      } else if (val === 'out_of_stock') {
+        currentFilters.inStock = false;
+      } else {
+        currentFilters.inStock = null;
+      }
       fetchAndRenderProducts();
+    }
+
+    function handleInStockToggle(checked) {
+      handleStockFilterChange(checked ? 'in_stock' : 'all');
     }
 
     function handleSortChange(sort) {
@@ -736,7 +750,9 @@
     function resetFilters() {
       currentFilters = { shopId: null, category: 'All', inStock: null, search: '', sort: 'createdAt,desc' };
       document.getElementById('searchInput').value = '';
-      document.getElementById('inStockToggle').checked = false;
+      if (document.getElementById('stockFilterSelect')) {
+        document.getElementById('stockFilterSelect').value = 'all';
+      }
       document.getElementById('shopFilterSelect').value = '';
       handleCategoryFilter('All');
     }

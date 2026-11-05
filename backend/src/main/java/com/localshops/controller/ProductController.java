@@ -84,7 +84,7 @@ public class ProductController {
     }
 
     @GetMapping("/api/products")
-    @Operation(summary = "Search products", description = "Public search with query, category, area, shopId, price range, and pagination")
+    @Operation(summary = "Search products", description = "Public search with query, category, area, shopId, price range, inStock, and pagination")
     public PageResponse<ProductResponse> searchProducts(
             @RequestParam(required = false) String q,
             @RequestParam(required = false) String category,
@@ -92,9 +92,10 @@ public class ProductController {
             @RequestParam(required = false) Long shopId,
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(required = false) Boolean inStock,
             @PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        return productService.searchProducts(q, category, area, shopId, minPrice, maxPrice, pageable);
+        return productService.searchProducts(q, category, area, shopId, minPrice, maxPrice, inStock, pageable);
     }
 
     @PostMapping(value = "/api/products/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
