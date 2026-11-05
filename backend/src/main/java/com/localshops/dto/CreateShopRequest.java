@@ -24,3 +24,4 @@ public class CreateShopRequest {
     @Size(min = 2, max = 100, message = "Area must be between 2 and 100 characters")
     private String area;
 }
+

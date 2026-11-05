@@ -33,3 +33,4 @@ public class OpenApiConfig {
                                         .description("Enter your JWT access token (without 'Bearer ' prefix)")));
     }
 }
+

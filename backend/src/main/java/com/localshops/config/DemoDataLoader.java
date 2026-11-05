@@ -119,3 +119,4 @@ public class DemoDataLoader implements CommandLineRunner {
         log.info("Demo accounts: Admin: admin@localshops.com | Owner: owner@localshops.com | Customer: customer@localshops.com (Password: Password@123)");
     }
 }
+

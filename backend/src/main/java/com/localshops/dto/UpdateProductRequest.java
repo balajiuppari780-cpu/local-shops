@@ -37,3 +37,4 @@ public class UpdateProductRequest {
     @Size(min = 2, max = 80, message = "Category must be between 2 and 80 characters")
     private String category;
 }
+

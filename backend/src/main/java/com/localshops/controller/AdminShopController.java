@@ -33,3 +33,4 @@ public class AdminShopController {
         return shopService.rejectShop(id);
     }
 }
+

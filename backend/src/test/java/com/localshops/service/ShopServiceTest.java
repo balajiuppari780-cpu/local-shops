@@ -104,3 +104,4 @@ class ShopServiceTest {
         assertThat(response.getStatus()).isEqualTo(ShopStatus.APPROVED);
     }
 }
+

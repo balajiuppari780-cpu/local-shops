@@ -5,3 +5,4 @@ public enum ShopStatus {
     APPROVED,
     REJECTED
 }
+

@@ -59,3 +59,4 @@ class CustomUserDetailsServiceTest {
                 .hasMessageContaining("User not found with email");
     }
 }
+

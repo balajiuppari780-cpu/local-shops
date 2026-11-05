@@ -84,3 +84,4 @@ public class ShopService {
         return ShopResponse.fromEntity(shop);
     }
 }
+
