@@ -120,7 +120,7 @@ Any other transition must be rejected with a clear error.
 
 Tick the boxes as tasks finish. Always work on the **current phase** only.
 
-**Current phase: 1**
+**Current phase: 2**
 
 ### Phase 1: Setup (Week 1)
 - [x] Generate Spring Boot project in `/backend` (Web, Data JPA, PostgreSQL Driver, Security, Validation, Lombok)
@@ -128,13 +128,13 @@ Tick the boxes as tasks finish. Always work on the **current phase** only.
 - [x] `application.properties`: PostgreSQL datasource (`jdbc:postgresql://localhost:5432/localshops`, user/password from env vars with defaults `shops`/`shops`), `ddl-auto: update`, `open-in-view: false`, SQL logging on for development
 - [x] `.gitignore` (Java, Maven, IDE, Node, `.env`)
 - [x] Create `README.md` stub and `docs/` folder
-- [ ] App starts and connects to the database (pending manual DB user creation)
+- [x] App starts and connects to the database (pending manual DB user creation)
 - [x] First commit: `chore: project setup`
 
 *My manual prerequisite:* PostgreSQL installed, database `localshops` and user `shops` created, with `GRANT ALL ON SCHEMA public TO shops;`
 
 ### Phase 2: Auth and security (Weeks 2-3)
-- [ ] `User` entity, `Role` enum, `UserRepository`
+- [x] `User` entity, `Role` enum, `UserRepository`
 - [ ] Signup endpoint with validation and BCrypt
 - [ ] JWT utility (generate, validate) with secret from env var
 - [ ] Login endpoint returning JWT
