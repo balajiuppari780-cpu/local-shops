@@ -120,7 +120,7 @@ Any other transition must be rejected with a clear error.
 
 Tick the boxes as tasks finish. Always work on the **current phase** only.
 
-**Current phase: 2**
+**Current phase: 3**
 
 ### Phase 1: Setup (Week 1)
 - [x] Generate Spring Boot project in `/backend` (Web, Data JPA, PostgreSQL Driver, Security, Validation, Lombok)
@@ -138,10 +138,10 @@ Tick the boxes as tasks finish. Always work on the **current phase** only.
 - [x] Signup endpoint with validation and BCrypt
 - [x] JWT utility (generate, validate) with secret from env var
 - [x] Login endpoint returning JWT
-- [ ] JWT authentication filter and Spring Security config (stateless)
-- [ ] Role-based access on endpoints (`@PreAuthorize` or config)
+- [x] JWT authentication filter and Spring Security config (stateless)
+- [x] Role-based access on endpoints (`@PreAuthorize` or config)
 - [x] Global exception handler with consistent error format
-- [ ] Swagger configured with a "Bearer token" Authorize button
+- [x] Swagger configured with a "Bearer token" Authorize button
 - [ ] (Stretch) refresh tokens
 
 *Done when:* I can register, log in, call a protected endpoint with the token, and get 401/403 where expected.

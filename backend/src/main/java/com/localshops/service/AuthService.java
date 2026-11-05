@@ -66,4 +66,11 @@ public class AuthService {
                 .user(UserResponse.fromEntity(user))
                 .build();
     }
+
+    @Transactional(readOnly = true)
+    public UserResponse getCurrentUser(String email) {
+        User user = userRepository.findByEmail(email.toLowerCase())
+                .orElseThrow(() -> new InvalidCredentialsException("User not found with email: " + email));
+        return UserResponse.fromEntity(user);
+    }
 }

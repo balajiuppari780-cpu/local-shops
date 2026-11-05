@@ -10,6 +10,9 @@ import com.localshops.exception.EmailAlreadyExistsException;
 import com.localshops.exception.GlobalExceptionHandler;
 import com.localshops.exception.InvalidCredentialsException;
 import com.localshops.model.Role;
+import com.localshops.security.CustomUserDetailsService;
+import com.localshops.security.JwtAuthenticationFilter;
+import com.localshops.security.JwtService;
 import com.localshops.service.AuthService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,12 +27,13 @@ import java.time.Instant;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AuthController.class)
-@Import({SecurityConfig.class, GlobalExceptionHandler.class})
+@Import({SecurityConfig.class, JwtAuthenticationFilter.class, GlobalExceptionHandler.class})
 class AuthControllerTest {
 
     @Autowired
@@ -40,6 +44,12 @@ class AuthControllerTest {
 
     @MockitoBean
     private AuthService authService;
+
+    @MockitoBean
+    private CustomUserDetailsService customUserDetailsService;
+
+    @MockitoBean
+    private JwtService jwtService;
 
     @Test
     @DisplayName("POST /api/auth/signup - returns 201 Created on valid input")
@@ -177,6 +187,44 @@ class AuthControllerTest {
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.status").value(401))
                 .andExpect(jsonPath("$.message").value("Invalid email or password"));
+    }
+
+    @Test
+    @DisplayName("GET /api/auth/me - returns 401 Unauthorized without Bearer token")
+    void shouldReturn401WhenAccessingProtectedWithoutToken() throws Exception {
+        mockMvc.perform(get("/api/auth/me"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.status").value(401));
+    }
+
+    @Test
+    @DisplayName("GET /api/auth/me - returns 200 OK with valid Bearer token")
+    void shouldReturn200WithValidBearerToken() throws Exception {
+        String token = "valid.jwt.token";
+        org.springframework.security.core.userdetails.User springUser =
+                new org.springframework.security.core.userdetails.User(
+                        "ravi@example.com",
+                        "password",
+                        java.util.Collections.singletonList(new org.springframework.security.core.authority.SimpleGrantedAuthority("ROLE_CUSTOMER"))
+                );
+
+        when(jwtService.extractEmail(token)).thenReturn("ravi@example.com");
+        when(customUserDetailsService.loadUserByUsername("ravi@example.com")).thenReturn(springUser);
+        when(jwtService.isTokenValid(token, "ravi@example.com")).thenReturn(true);
+
+        UserResponse userResponse = UserResponse.builder()
+                .id(1L)
+                .name("Ravi Teja")
+                .email("ravi@example.com")
+                .role(Role.CUSTOMER)
+                .build();
+        when(authService.getCurrentUser("ravi@example.com")).thenReturn(userResponse);
+
+        mockMvc.perform(get("/api/auth/me")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("ravi@example.com"))
+                .andExpect(jsonPath("$.role").value("CUSTOMER"));
     }
 }
 
