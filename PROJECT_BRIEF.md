@@ -120,7 +120,7 @@ Any other transition must be rejected with a clear error.
 
 Tick the boxes as tasks finish. Always work on the **current phase** only.
 
-**Current phase: 3**
+**Current phase: 4**
 
 ### Phase 1: Setup (Week 1)
 - [x] Generate Spring Boot project in `/backend` (Web, Data JPA, PostgreSQL Driver, Security, Validation, Lombok)
@@ -147,12 +147,12 @@ Tick the boxes as tasks finish. Always work on the **current phase** only.
 *Done when:* I can register, log in, call a protected endpoint with the token, and get 401/403 where expected.
 
 ### Phase 3: Catalog APIs (Weeks 3-5)
-- [ ] `Shop` entity, registration (PENDING), admin approve/reject
-- [ ] `Product` entity with `@Version`, owner-only CRUD (check ownership in the service layer)
-- [ ] Public product search and filters with pagination and sorting
-- [ ] Image upload to local folder, serve via URL
-- [ ] DTOs and mapping for everything
-- [ ] Swagger documentation with clear descriptions
+- [x] `Shop` entity, registration (PENDING), admin approve/reject
+- [x] `Product` entity with `@Version`, owner-only CRUD (check ownership in the service layer)
+- [x] Public product search and filters with pagination and sorting
+- [x] Image upload to local folder, serve via URL
+- [x] DTOs and mapping for everything
+- [x] Swagger documentation with clear descriptions
 
 *Done when:* the whole catalog works through Swagger.
 
