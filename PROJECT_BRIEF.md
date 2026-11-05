@@ -136,7 +136,7 @@ Tick the boxes as tasks finish. Always work on the **current phase** only.
 ### Phase 2: Auth and security (Weeks 2-3)
 - [x] `User` entity, `Role` enum, `UserRepository`
 - [x] Signup endpoint with validation and BCrypt
-- [ ] JWT utility (generate, validate) with secret from env var
+- [x] JWT utility (generate, validate) with secret from env var
 - [ ] Login endpoint returning JWT
 - [ ] JWT authentication filter and Spring Security config (stateless)
 - [ ] Role-based access on endpoints (`@PreAuthorize` or config)

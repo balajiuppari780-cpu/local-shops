@@ -31,3 +31,4 @@ public class SignupRequest {
     @NotNull(message = "Role is required (CUSTOMER or SHOP_OWNER)")
     private Role role;
 }
+

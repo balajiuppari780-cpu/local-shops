@@ -29,3 +29,4 @@ public class AuthController {
         return authService.signup(request);
     }
 }
+

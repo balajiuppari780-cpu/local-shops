@@ -103,3 +103,4 @@ class AuthServiceTest {
                 .hasMessageContaining("ADMIN role cannot be assigned through public registration");
     }
 }
+

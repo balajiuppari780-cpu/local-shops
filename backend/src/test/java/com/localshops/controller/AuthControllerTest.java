@@ -110,3 +110,4 @@ class AuthControllerTest {
                 .andExpect(jsonPath("$.message").value("Email is already registered: ravi@example.com"));
     }
 }
+
