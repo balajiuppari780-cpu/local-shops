@@ -224,3 +224,4 @@ Start with **Phase 1 only**:
 4. Run the app and confirm it connects to my local PostgreSQL. If the connection fails, tell me what to fix instead of changing the design.
 5. Make the first commit.
 6. Summarize what you created, tick the Phase 1 boxes in this file, and **stop and wait**.
+
