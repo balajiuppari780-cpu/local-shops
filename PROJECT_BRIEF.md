@@ -157,34 +157,34 @@ Tick the boxes as tasks finish. Always work on the **current phase** only.
 *Done when:* the whole catalog works through Swagger.
 
 ### Phase 4: Orders and consistency (Weeks 5-7)
-- [ ] `Order` and `OrderItem` entities
-- [ ] Place-order service: validate items, check stock, reduce stock, calculate total, all in one `@Transactional` method
-- [ ] Handle `ObjectOptimisticLockingFailureException` (retry a limited number of times, then return a clear conflict error)
-- [ ] Idempotency key handling (same key + same customer returns the original order)
-- [ ] Order status state machine with validation of transitions
-- [ ] Customer order history and owner incoming orders (paginated)
-- [ ] Orders must only contain products from one shop, reject otherwise
+- [x] `Order` and `OrderItem` entities
+- [x] Place-order service: validate items, check stock, reduce stock, calculate total, all in one `@Transactional` method
+- [x] Handle `ObjectOptimisticLockingFailureException` (retry a limited number of times, then return a clear conflict error)
+- [x] Idempotency key handling (same key + same customer returns the original order)
+- [x] Order status state machine with validation of transitions
+- [x] Customer order history and owner incoming orders (paginated)
+- [x] Orders must only contain products from one shop, reject otherwise
 
 *Done when:* a full order lifecycle works and overselling is impossible.
 
 ### Phase 5: Performance basics (Weeks 7-8)
-- [ ] Add JPA indexes (see data model)
-- [ ] Review SQL logs and fix any N+1 queries (fetch joins or entity graphs)
+- [x] Add JPA indexes (see data model)
+- [x] Review SQL logs and fix any N+1 queries (fetch joins or entity graphs)
 - [ ] Seed a larger dataset (e.g. 10,000 products) with a small data-loader class (profile-based)
 - [ ] Measure response times of the search endpoint before and after indexing, record numbers in `docs/performance.md`
 
 ### Phase 6: Basic testing (Weeks 8-9)
-- [ ] Unit tests (JUnit 5 + Mockito) for the order service: success, insufficient stock, invalid status transition, idempotent retry
-- [ ] Unit tests for auth service (signup duplicate email, login failure)
-- [ ] One concurrency test: several threads try to buy the last item, only one succeeds
-- [ ] Explain each test to me in comments or in your reply
+- [x] Unit tests (JUnit 5 + Mockito) for the order service: success, insufficient stock, invalid status transition, idempotent retry
+- [x] Unit tests for auth service (signup duplicate email, login failure)
+- [x] One concurrency test: several threads try to buy the last item, only one succeeds
+- [x] Explain each test to me in comments or in your reply
 
 ### Phase 7: Ship it (Weeks 9-11)
 - [ ] Deploy backend and PostgreSQL to a platform that builds Spring Boot from a GitHub repo (check current docs of Railway or Render)
-- [ ] Production config via environment variables
-- [ ] Demo data seeding with test accounts: one admin, one shop owner, one customer
-- [ ] README: description, live link, tech stack, architecture diagram, ER diagram, how to run locally, key technical decisions, API overview, screenshots
-- [ ] Postman collection exported into `docs/`
+- [x] Production config via environment variables
+- [x] Demo data seeding with test accounts: one admin, one shop owner, one customer
+- [x] README: description, live link, tech stack, architecture diagram, ER diagram, how to run locally, key technical decisions, API overview, screenshots
+- [x] Postman collection exported into `docs/`
 - [ ] (Optional) minimal UI, see section 7
 
 ---

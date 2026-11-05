@@ -1,0 +1,67 @@
+{
+  "info": {
+    "name": "Local Shops Marketplace API",
+    "description": "Postman Collection for Local Shops Marketplace Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Signup (Customer)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Priya Verma\",\n  \"email\": \"priya@example.com\",\n  \"password\": \"Password@123\",\n  \"role\": \"CUSTOMER\"\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/auth/signup", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "signup"] }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"customer@localshops.com\",\n  \"password\": \"Password@123\"\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "login"] }
+      }
+    },
+    {
+      "name": "Shops - List Approved",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:8080/api/shops?page=0&size=10", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "shops"] }
+      }
+    },
+    {
+      "name": "Products - Search",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:8080/api/products?q=rice&page=0&size=10", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "products"] }
+      }
+    },
+    {
+      "name": "Orders - Place Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" },
+          { "key": "Idempotency-Key", "value": "order-req-001" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2\n    }\n  ]\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/orders", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "orders"] }
+      }
+    }
+  ]
+}
