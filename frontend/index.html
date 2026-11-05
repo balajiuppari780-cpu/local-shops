@@ -354,6 +354,11 @@
       await fetchAndRenderProducts();
       renderCartUI();
 
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('openCart') === 'true') {
+        setTimeout(() => toggleCartDrawer(true), 200);
+      }
+
       window.addEventListener('cart-updated', () => {
         renderCartUI();
         updateProductGridCounters();
@@ -627,11 +632,14 @@
       const backdrop = document.getElementById('cartBackdrop');
 
       if (open) {
+        renderCartUI();
         modal.classList.remove('pointer-events-none', 'hidden');
-        drawer.classList.remove('translate-x-full');
-        drawer.classList.add('translate-x-0');
-        backdrop.classList.remove('opacity-0');
-        backdrop.classList.add('opacity-100');
+        requestAnimationFrame(() => {
+          drawer.classList.remove('translate-x-full');
+          drawer.classList.add('translate-x-0');
+          backdrop.classList.remove('opacity-0');
+          backdrop.classList.add('opacity-100');
+        });
         document.body.style.overflow = 'hidden';
       } else {
         drawer.classList.remove('translate-x-0');
@@ -639,7 +647,7 @@
         backdrop.classList.remove('opacity-100');
         backdrop.classList.add('opacity-0');
         setTimeout(() => {
-          modal.classList.add('hidden');
+          modal.classList.add('hidden', 'pointer-events-none');
           document.body.style.overflow = '';
         }, 300);
       }
@@ -735,3 +743,4 @@
   </script>
 </body>
 </html>
+
